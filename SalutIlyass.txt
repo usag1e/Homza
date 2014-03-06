@@ -1,0 +1,12 @@
+Hey!
+
+Quelques basiques de git :
+- git status : Voir l'état des fichiers qui sont dans le dossier (suivis, commités, il y a des modifications pas commitées (donc pas sauvées), etc.) 
+A UTILISER BEAUCOUP AU DEBUT (^)
+- git commit -m '<message de commit décrivant le commit>' : Commiter, c'est sauvegarder tout ce que tu as modifier dans les fichiers qui sont concernés par le commit (cf add).
+- git add <fichier> : Ajouter un fichier au prochain commit. Tu peux ajouter tous les fichiers du dossier d'un coup avec "git add --all" mais FAIRE ATTENTION avec ca.
+- git rm <fichier> : CE N'EST PAS enlever un fichier du commit (faut faire attention, ca supprime le fichier de la liste des fichiers dont tu track les changements en gros)
+- git pull ( <remote> <branch> ) : Récupérer toutes les modifications qui sont sur le repository <remote> (un serveur) sauvées dans la branche <branche>
+- git push ( <remote> <branch> ) : Pousser les modifications faites ET COMMITEES uniquement sur le repository <remote>
+- git stash : Mettre de côté (dans une poche) toutes les modifications pas commitées
+- git stash pop : Sortir et remettre toutes ces modifications (il n'est pas obligatoire de les ressortir. Si tu veux annuler tout ce que tu as fait, tu caches tout ca dans une poche et tu l'oublies
