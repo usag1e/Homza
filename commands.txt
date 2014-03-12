@@ -8,5 +8,7 @@ A UTILISER BEAUCOUP AU DEBUT (^)
 - git rm <fichier> : CE N'EST PAS enlever un fichier du commit (faut faire attention, ca supprime le fichier de la liste des fichiers dont tu track les changements en gros)
 - git pull ( <remote> <branch> ) : Récupérer toutes les modifications qui sont sur le repository <remote> (un serveur) sauvées dans la branche <branche>
 - git push ( <remote> <branch> ) : Pousser les modifications faites ET COMMITEES uniquement sur le repository <remote>
+- git whatchanged : Voir l'historique des changements
+
 - git stash : Mettre de côté (dans une poche) toutes les modifications pas commitées
 - git stash pop : Sortir et remettre toutes ces modifications (il n'est pas obligatoire de les ressortir. Si tu veux annuler tout ce que tu as fait, tu caches tout ca dans une poche et tu l'oublies
