@@ -14,5 +14,15 @@ print('The temperature in Montreal is:', temperature)
 description = rj['weather'][0]['description']
 print('The weather is', description)
 
+#Tentative de creation d'un objet LED avec des attributs
+class LED:
+	def __init__(self, color, status):
+		self.color = color
+		self.status = status
+
+LED_weather = LED("blue", "ON")
+
+print("The LED is", LED_weather.color)
+print("The LED is", LED_weather.status)
 
 
