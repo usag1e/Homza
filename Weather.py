@@ -19,6 +19,8 @@ def getWeatherMontreal() :
 # LED class definition : trying to create an object with two attribute
 # color : HEXA ? word ? (Define the type of the attribute here)
 # status : boolean
+
+#I: Python etant dynamique, je devrais pouvoir attendre jusque la derniere minute pour faire de status une variable booleenne, mais je ne sais pas comment le faire...
 class LED:
     def __init__(self, color, status):
         self.color = color
