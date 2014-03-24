@@ -15,6 +15,8 @@ def getWeatherMontreal() :
     print('The temperature in Montreal is:', temperature)
     description = rj['weather'][0]['description']
     print('The weather is', description)
+    
+getWeatherMontreal()
 
 # LED class definition : trying to create an object with two attribute
 # color : HEXA ? word ? (Define the type of the attribute here)
