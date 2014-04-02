@@ -11,6 +11,8 @@ import requests
 
 #I: C'est quoi cron?
 
+##Type numerotation choisie pour les PIN
+GPIO.setmode(GPIO.BOARD)
 ##Test Pin is 5
 GPIO.setup(5, GPIO.OUT)
 ##Test Pin is 7
