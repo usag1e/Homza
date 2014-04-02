@@ -10,14 +10,21 @@ GPIO.setup(7, GPIO.OUT)
 
 ##Define a function named Blink()
 def Blink(numTimes,speed):
-for i in range(0,numTimes):## Run loop numTimes
-print "Iteration " + str(i+1)## Print current loop
-GPIO.output(7,True)## Switch on pin 7
-time.sleep(speed)## Wait
-GPIO.output(7,False)## Switch off pin 7
-time.sleep(speed)## Wait
-print "Done" ## When loop is complete, print "Done"
-GPIO.cleanup()
+	## Run loop numTimes
+	for i in range(0,numTimes):
+		## Print current loop
+		print "Iteration " + str(i+1)
+		## Switch on pin 7
+		GPIO.output(7,True)
+		## Wait
+		time.sleep(speed)
+		## Switch off pin 7
+		GPIO.output(7,False)
+		## Wait
+		time.sleep(speed)
+	## When loop is complete, print "Done"
+	print "Done" 
+	GPIO.cleanup()
 
 ## Ask user for total number of blinks and length of each blink
 iterations = raw_input("Enter total number of times to blink: ")
