@@ -28,6 +28,7 @@ def getISSMontreal() :
     Duration = rj['response'][0]['duration']
     print('The ISS will be visible for', Duration, 'seconds')
     
+    #This section uses time stamps to determine if the ISS is currently in the air
     now = datetime.datetime.now()
     if Date.month == now.month:
       print('month OK')
@@ -45,4 +46,6 @@ def getISSMontreal() :
 	else:
 	  print('ISS currently not visible')
 
-getISSMontreal()
+while True:
+    getISSMontreal()
+    time.sleep(30)
