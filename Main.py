@@ -12,6 +12,6 @@ import time
 
 while True:
     getWeatherMontreal()
-    getISSMontreal
-    CheckInternet
+    getISSMontreal()
+    CheckInternet()
     time.sleep(20)
