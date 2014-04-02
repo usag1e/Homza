@@ -1,6 +1,10 @@
 #I: D'ou tu peux ecrire import "nom_d'un_fichier_en_python"?
-import Transportation
-import Weather
+import time
+import os, datetime
+import urllib2 
+import RPi.GPIO as GPIO
+from pprint import pprint
+import requests
 
 # Some kind of main that will call the different functions to fetch data
 # This file will be regularly called by cron
@@ -11,6 +15,8 @@ import Weather
 GPIO.setup(5, GPIO.OUT)
 ##Test Pin is 7
 GPIO.setup(7, GPIO.OUT)
+##Test Pin is 6
+GPIO.setup(6, GPIO.OUT)
 
 def CheckInternet():
   while True:
@@ -22,7 +28,7 @@ def CheckInternet():
 	  time.sleep(10)
       else:
 	  print "Connected"
-	  GPIO.output(7, False)
+	  GPIO.output(5, False)
 	  break
 
 # Function to get the weather in Montreal
@@ -43,9 +49,6 @@ def getWeatherMontreal() :
         GPIO.output(7, True)
     else:
         GPIO.output(7, False)
-        
-##Test Pin is 6
-GPIO.setup(6, GPIO.OUT)
 
 # Function to get the weather in Montreal
 def getISSMontreal() :
