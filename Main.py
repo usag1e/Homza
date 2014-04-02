@@ -2,6 +2,7 @@
 from Weather import getWeatherMontreal
 import ISS
 import Internet
+import time
 
 # Some kind of main that will call the different functions to fetch data
 # This file will be regularly called by cron
