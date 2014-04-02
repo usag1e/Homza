@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
+GPIO.cleanup()
 
 CODE = {' ': ' ',
         "'": '.----.',
@@ -50,7 +51,8 @@ CODE = {' ': ' ',
         'Y': '-.--',
         'Z': '--..',
         '_': '..--.-'}
-ledPin=9
+ledPin=7
+print("Chosen Pin:", ledPin)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(ledPin,GPIO.OUT)
 
@@ -70,11 +72,11 @@ def dash():
 while True:
 	input = raw_input('What would you like to send? ')
 	for letter in input:
-			for symbol in CODE[letter.upper()]:
-				if symbol == '-':
-					dash()
-				elif symbol == '.':
-					dot()
-				else:
-					time.sleep(0.5)
-			time.sleep(0.5)
+		for symbol in CODE[letter.upper()]:
+	       		if symbol == '-':
+       				dash()
+		       	elif symbol == '.':
+	       			dot()
+		       	else:
+			       	time.sleep(0.5)
+		time.sleep(0.5)
