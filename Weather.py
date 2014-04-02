@@ -27,6 +27,3 @@ def getWeatherMontreal() :
     else:
         GPIO.output(7, False)
 
-while True:
-    getWeatherMontreal()
-    time.sleep(600)

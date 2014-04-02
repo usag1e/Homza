@@ -20,8 +20,5 @@ def CheckInternet():
 	  print "Connected"
 	  GPIO.output(7, False)
 	  break
-	
-while True:
-  CheckInternet()
-  time.sleep(12)
+
 

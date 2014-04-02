@@ -48,6 +48,3 @@ def getISSMontreal() :
 	  print('ISS currently not visible')
 	  GPIO.output(6, True)
 
-while True:
-    getISSMontreal()
-    time.sleep(30)

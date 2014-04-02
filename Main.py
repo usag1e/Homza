@@ -8,8 +8,6 @@ import Internet
 
 #I: C'est quoi cron?
 
-
-
 while True:
     getWeatherMontreal()
     CheckInternet()
