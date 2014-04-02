@@ -86,14 +86,6 @@ def getISSMontreal() :
 
 while True:
     getWeatherMontreal()
-    time.sleep(600)
-
-while True:
+    CheckInternet()
     getISSMontreal()
-    time.sleep(30)
-    
-while True:
-  CheckInternet()
-  time.sleep(12)
-getWeatherMontreal()
-getTransportationInfoMontreal()
+    time.sleep(20)
