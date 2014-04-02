@@ -1,5 +1,5 @@
 #I: D'ou tu peux ecrire import "nom_d'un_fichier_en_python"?
-import Weather
+from Weather import getWeatherMontreal
 import ISS
 import Internet
 
@@ -9,7 +9,7 @@ import Internet
 #I: C'est quoi cron?
 
 while True:
-    print getWeatherMontreal.function()
+    print Weather()
     print CheckInternet.function()
     print getISSMontreal.function()
     time.sleep(20)
