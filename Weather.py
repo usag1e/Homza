@@ -9,7 +9,7 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(7, GPIO.OUT)
 
 # Function to get the weather in Montreal
-def getWeatherMontreal() :
+def getWeatherMontreal():
     #Requesting weather from OpenWeatherMap for Montreal, in .json
     r = requests.get('http://api.openweathermap.org/data/2.5/weather?q=Montreal&mode=json&units=metric')
     #extracting the .json data from the request

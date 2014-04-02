@@ -9,7 +9,7 @@ import Internet
 #I: C'est quoi cron?
 
 while True:
-    getWeatherMontreal()
-    CheckInternet()
-    getISSMontreal()
+    print getWeatherMontreal.function()
+    print CheckInternet.function()
+    print getISSMontreal.function()
     time.sleep(20)
