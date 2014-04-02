@@ -16,7 +16,7 @@ def getISSMontreal() :
     #Requesting ISS from Open-notify.org for Montreal, in .json
     l = requests.get('http://api.open-notify.org/iss-pass.json?lat=45.5&lon=73.567')
     #extracting the .json data from the request
-    lj = l.json()
+    lj = l.json
     #Printing the whole .json thing, with pprint() 'cause they say it's nicer
     #pprint(lj)
     #The API gives the date and time back as UNIX time, it must be converted, here we select the date from the json answer
