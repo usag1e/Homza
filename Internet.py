@@ -18,7 +18,7 @@ def CheckInternet():
 	  time.sleep(10)
       else:
 	  print "Connected"
-	  GPIO.output(7, False)
+	  GPIO.output(5, False)
 	  break
 
 
