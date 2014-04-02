@@ -3,13 +3,13 @@ from pprint import pprint
 import requests
 #This one is necessary to convert the time sent by the API in UNIX to normal date and time
 import os, datetime
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time
 
 ##Type numerotation choisie pour les PIN
-#GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BOARD)
 ##Test Pin is 7
-#GPIO.setup(7, GPIO.OUT)
+GPIO.setup(7, GPIO.OUT)
 
 # Function to get the weather in Montreal
 def getISSMontreal() :
