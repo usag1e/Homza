@@ -8,8 +8,8 @@ import time
 
 ##Type numerotation choisie pour les PIN
 GPIO.setmode(GPIO.BOARD)
-##Test Pin is 6
-GPIO.setup(6, GPIO.OUT)
+##Test Pin is 3
+GPIO.setup(3, GPIO.OUT)
 
 # Function to get the weather in Montreal
 def getISSMontreal() :
@@ -43,8 +43,8 @@ def getISSMontreal() :
 	Diff = nowsum - Datesum
 	if Diff > 0:
 	  print('THE ISS IS VISIBLE NOW')
-	  GPIO.output(6,True)
+	  GPIO.output(3,True)
 	else:
 	  print('ISS currently not visible')
-	  GPIO.output(6, True)
+	  GPIO.output(3, True)
 
