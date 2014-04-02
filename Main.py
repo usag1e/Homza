@@ -1,6 +1,7 @@
 #I: D'ou tu peux ecrire import "nom_d'un_fichier_en_python"?
 from Weather import getWeatherMontreal
-import ISS
+from ISS import getISSMontreal
+from Internet import CheckInternet
 import Internet
 import time
 
@@ -11,4 +12,6 @@ import time
 
 while True:
     getWeatherMontreal()
+    getISSMontreal
+    CheckInternet
     time.sleep(20)
