@@ -31,9 +31,7 @@ def getISSMontreal() :
     #This section uses time stamps to determine if the ISS is currently in the air
     now = datetime.datetime.now()
     if Date.month == now.month:
-      print('month OK')
       if Date.day == now.day:
-	print('day OK')
 	#print('Now=', now)
 	#print('Date=', Date)
 	nowsum = (now.hour*3600 + now.minute*60 + now.second)
@@ -48,5 +46,5 @@ def getISSMontreal() :
 	else:
 	  print('ISS currently not visible')
 	  print('3 is OFF')
-	  GPIO.output(3, True)
+	  GPIO.output(3, False)
 
