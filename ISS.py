@@ -32,7 +32,7 @@ def getISSMontreal() :
     now = datetime.datetime.now()
     if Date.month == now.month:
       print('Now=', now.day)
-      print('Date=', Date.da)
+      print('Date=', Date.day)
       if Date.day == now.day:
 	nowsum = (now.hour*3600 + now.minute*60 + now.second)
 	Datesum = (Date.hour*3600 + Date.minute*60 + Date.second)
