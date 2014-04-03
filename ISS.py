@@ -34,10 +34,10 @@ def getISSMontreal() :
       if Date.day == now.day:
 	nowsum = (now.hour*3600 + now.minute*60 + now.second)
 	Datesum = (Date.hour*3600 + Date.minute*60 + Date.second)
-	print(nowsum)
-	print(Datesum)
+	#print(nowsum)
+	#print(Datesum)
 	Diff = nowsum - Datesum
-	print(Diff)
+	#print(Diff)
 	if Diff > 0:
 	  print('THE ISS IS VISIBLE NOW')
 	  print('3 is ON')
@@ -46,7 +46,7 @@ def getISSMontreal() :
 	  print('ISS currently not visible')
 	  print('3 is OFF')
 	  GPIO.output(3, False)
-    else:
-      print('3 is OFF')
-      GPIO.output(3, False)  
+      else:
+	print('3 is OFF')
+	GPIO.output(3, False)  
 
