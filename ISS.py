@@ -31,8 +31,8 @@ def getISSMontreal() :
     #This section uses time stamps to determine if the ISS is currently in the air
     now = datetime.datetime.now()
     if Date.month == now.month:
-	print('Now=', now.day)
-	print('Date=', Date.da)
+      print('Now=', now.day)
+      print('Date=', Date.da)
       if Date.day == now.day:
 	nowsum = (now.hour*3600 + now.minute*60 + now.second)
 	Datesum = (Date.hour*3600 + Date.minute*60 + Date.second)
