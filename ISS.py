@@ -36,9 +36,10 @@ def getISSMontreal() :
 	#print('Date=', Date)
 	nowsum = (now.hour*3600 + now.minute*60 + now.second)
 	Datesum = (Date.hour*3600 + Date.minute*60 + Date.second)
-	#print(nowsum)
-	#print(Datesum)
+	print(nowsum)
+	print(Datesum)
 	Diff = nowsum - Datesum
+	print(Diff)
 	if Diff > 0:
 	  print('THE ISS IS VISIBLE NOW')
 	  print('3 is ON')
