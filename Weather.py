@@ -24,6 +24,7 @@ def getWeatherMontreal():
     print('Interrupt with Ctrl+C')
     if temperature > 0:
         GPIO.output(7, True)
+        print('7 is ON')
     else:
         GPIO.output(7, False)
-
+        print('7 is OFF')

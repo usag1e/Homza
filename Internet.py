@@ -14,10 +14,12 @@ def CheckInternet():
 	  urllib2.urlopen("http://www.google.com").close()
       except urllib2.URLError:
 	  print "Not Connected"
+	  print "5 is ON"
 	  GPIO.output(5, True)
 	  time.sleep(10)
       else:
 	  print "Connected"
+	  print "5 is OFF"
 	  GPIO.output(5, False)
 	  break
 
