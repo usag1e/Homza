@@ -11,10 +11,13 @@ def closeDBConnection( connection ):
             connection.close()
 
 def getHomeFromDB():
-    pass
+    position = Position()
+    position.latitude = executeQueryDB("SELECT positions.latitude FROM locations JOIN positions ON locations.position_id=positions.id WHERE locations.name = 'home';", display )
+    position.longitude = executeQueryDB("SELECT positions.longitude FROM locations JOIN positions ON locations.position_id=positions.id WHERE locations.name = 'home';", display )
+    return position
 
 def display( result_of_query ):
-    print result_of_query
+    print result_of_query.fetch_row()[0]
 
 def executeQueryDB( query, treatment_function ):
     try:
@@ -33,5 +36,5 @@ def executeQueryDB( query, treatment_function ):
     finally:
         closeDBConnection( connection )
 
-
-executeQueryDB("SELECT VERSION()", display)
+positionHome = getHomeFromDB()
+print "Home is %.2f, %.2f"%(positionHome.latitude, positionHome.longitude)
