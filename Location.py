@@ -1,13 +1,13 @@
 import time
 import requests
-import Position
+from position import Position
 # We'll get the location itself with the HTML5 API from the configuration page
 
 # We still need to calculate the distance and the time it takes 
 def getDurationOfTravel( position1 , position2 ) :
     # Speed to walk ? (in km/h)
     speed = 5.0
-    request_url = "http://cardemo-raw.no-ip.org:15555/viaroute?loc="+position1.lat+","+position1.lon+"&loc="+position2.lat+","+position2.lon
+    request_url = "http://router.project-osrm.org:5000/viaroute?loc="+str(position1.lat)+","+str(position1.lon)+"&loc="+str(position2.lat)+","+str(position2.lon)
     response = requests.get(request_url)
     # Analyse response (in JSON)
     responseJSON = response.json;
@@ -28,7 +28,7 @@ def getDurationOfTravelFromHomeTo( position ):
 position1 = Position()
 position1.name = "test home"
 position1.lat = 53.2734
-position.lon = -7.77832031
+position1.lon = -7.77832031
 position2 = Position()
 position2.name = "test destination"
 position2.lat = 53.33904747

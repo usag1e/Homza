@@ -41,8 +41,8 @@ def display( result_of_query ):
 # Treatment functions
 def translateToPosition( tuple ):
     position = Position()
-    position.latitude = tuple["latitude"]
-    position.longitude = tuple["longitude"]
+    position.lat = tuple["latitude"]
+    position.lon = tuple["longitude"]
     return position
 
 def getHomeFromDB():
