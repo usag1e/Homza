@@ -1,6 +1,6 @@
 import _mysql
 import sys
-
+from position import Position
 # Handler taking care of the operations on the Database
 
 def connectToDB():
