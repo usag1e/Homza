@@ -1,33 +1,23 @@
-import _mysql
+import MySQLdb as mdb
 import sys
 from position import Position
 # Handler taking care of the operations on the Database
 
 def connectToDB():
-    return _mysql.connect('localhost', 'mdepart_user', 'mdepartRaspberry', 'mDepart')
+    return mdb.connect('localhost', 'mdepart_user', 'mdepartRaspberry', 'mDepart')
     
 def closeDBConnection( connection ):
     if connection:
             connection.close()
 
-def getHomeFromDB():
-    position = Position()
-    position.latitude = executeQueryDB("SELECT positions.latitude FROM locations JOIN positions ON locations.position_id=positions.id WHERE locations.name = 'home';", display )
-    position.longitude = executeQueryDB("SELECT positions.longitude FROM locations JOIN positions ON locations.position_id=positions.id WHERE locations.name = 'home';", display )
-    return position
-
-def display( result_of_query ):
-    print result_of_query.fetch_row()[0]
-
-def executeQueryDB( query, treatment_function ):
+def executeOnDB( query ):
     try:
         connection = connectToDB()
         
-        connection.query( query )
-        
-        result = connection.use_result()
-        treatment_function( result )
-        # print "MySQL version: %s" % result.fetch_row()[0]
+	cursor = connection.cursor(mdb.cursors.DictCursor)
+	cursor.execute( query )
+
+	rows = cursor.fetchall()
 
     except _mysql.Error, e:
         print "Error %d: %s" % (e.args[0], e.args[1])
@@ -35,6 +25,26 @@ def executeQueryDB( query, treatment_function ):
 
     finally:
         closeDBConnection( connection )
+	if len( rows ) > 1:
+	    return rows 
+	else:
+	    return rows[0]
 
-positionHome = getHomeFromDB()
-print "Home is %.2f, %.2f"%(positionHome.latitude, positionHome.longitude)
+def display( result_of_query ):
+    if type( result_of_query ) is list:
+	print len( result_of_query )+" results in query"
+	for result in result_of_query:
+	    print result
+    else:
+	print result_of_query
+
+# Treatment functions
+def translateToPosition( tuple ):
+    position = Position()
+    position.latitude = tuple["latitude"]
+    position.longitude = tuple["longitude"]
+    return position
+
+def getHomeFromDB():
+    return translateToPosition( executeOnDB( "SELECT positions.latitude, positions.longitude FROM locations JOIN positions ON locations.position_id=positions.id WHERE locations.name = 'home';" ) )
+
