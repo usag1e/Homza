@@ -28,5 +28,6 @@ def getWeatherMontreal():
     else:
         GPIO.output(7, False)
         print('7 is OFF')
+    GPIO.cleanup()
 
 getWeatherMontreal()

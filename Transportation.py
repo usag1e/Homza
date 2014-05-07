@@ -10,5 +10,6 @@ def getTransportationInfoMontreal() :
     output = open('Montreal.zip','wb')
     output.write('transporation/',time_Montreal.read())
     output.close()
+    GPIO.cleanup()
 
 # Ce bout fonctionne, et telecharge dans le dossier ou se trouve Transportation.py le fichier Montreal.zip qui contient les horaires et tout

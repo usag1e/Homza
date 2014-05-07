@@ -22,5 +22,6 @@ def CheckInternet():
 	  print "5 is OFF"
 	  GPIO.output(5, False)
 	  break
+      GPIO.cleanup()
 
 
