@@ -3,6 +3,10 @@ import requests
 from position import Position
 # We'll get the location itself with the HTML5 API from the configuration page
 
+import socket
+import pygeoip
+#To get the position through IP location
+
 # We still need to calculate the distance and the time it takes 
 def getDurationOfTravel( position1 , position2 ) :
     # Speed to walk ? (in km/h)
@@ -25,12 +29,22 @@ def getDurationOfTravelFromHomeTo( position ):
     home = getHomeFromDB()
     return getDurationOfTravel( home , position )
 
-position1 = Position()
-position1.name = "test home"
-position1.lat = 53.2734
-position1.lon = -7.77832031
-position2 = Position()
-position2.name = "test destination"
-position2.lat = 53.33904747
-position2.lon = -7.27294922
-getDurationOfTravel( position1, position2 )
+#JE commente tout ca parce que ca marche pas et que je voudrais tester la suite quand meme
+#position1 = Position()
+#position1.name = "test home"
+#position1.lat = 53.2734
+#position1.lon = -7.77832031
+#position2 = Position()
+#position2.name = "test destination"
+#position2.lat = 53.33904747
+#position2.lon = -7.27294922
+#getDurationOfTravel( position1, position2 )
+
+IP = socket.gethostbyname( socket.gethostname() )
+print IP
+Hostname = socket.gethostname()
+print Hostname
+
+#def get_IP_location( IP ):
+  
+  
