@@ -40,10 +40,13 @@ def getDurationOfTravelFromHomeTo( position ):
 #position2.lon = -7.27294922
 #getDurationOfTravel( position1, position2 )
 
-IP = socket.gethostbyname( socket.gethostname() )
-print IP
-Hostname = socket.gethostname()
-print Hostname
+r = requests.get(r'http://jsonip.com')
+ip= r.json()['ip']
+print 'Your IP is' 
+
+
+gi = pygeoip.GeoIP('GeoIP.dat')
+print gi.country_name_by_addr(ip)
 
 #def get_IP_location( IP ):
   
