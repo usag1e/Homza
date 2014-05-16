@@ -53,7 +53,7 @@ CODE = {' ': ' ',
         '_': '..--.-'}
 ledPin=7
 print("Chosen Pin:", ledPin)
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BOARD)
 GPIO.setup(ledPin,GPIO.OUT)
 
 
