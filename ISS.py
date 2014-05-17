@@ -6,11 +6,12 @@ import os, datetime
 import RPi.GPIO as GPIO
 import time
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(3, GPIO.OUT)
+#GPIO.setmode(GPIO.BOARD)
+
 
 # Function to get the weather in Montreal
 def getISSMontreal() :
+	GPIO.setup(3, GPIO.OUT)
     #Requesting ISS from Open-notify.org for Montreal, in .json
     l = requests.get('http://api.open-notify.org/iss-pass.json?lat=45.5&lon=73.567')
     #extracting the .json data from the request
