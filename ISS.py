@@ -6,7 +6,8 @@ import os, datetime
 import RPi.GPIO as GPIO
 import time
 
-
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(3, GPIO.OUT)
 
 # Function to get the weather in Montreal
 def getISSMontreal() :
