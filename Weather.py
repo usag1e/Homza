@@ -22,9 +22,10 @@ def getWeatherMontreal():
     description = rj['weather'][0]['description']
     print('The weather is', description)
     print('Interrupt with Ctrl+C')
-    if temperature > 20:
+    if temperature > 18 :
         GPIO.output(7, True)
         print('7 is ON')
+	time.sleep(5)
     else:
         GPIO.output(7, False)
         print('7 is OFF')
