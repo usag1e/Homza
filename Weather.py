@@ -3,11 +3,6 @@ import requests
 import RPi.GPIO as GPIO
 import time
 
-##Type numerotation choisie pour les PIN
-GPIO.setmode(GPIO.BOARD)
-##Test Pin is 7
-GPIO.setup(7, GPIO.OUT)
-
 # Function to get the weather in Montreal
 def getWeatherMontreal():
     #Requesting weather from OpenWeatherMap for Montreal, in .json
