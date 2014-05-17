@@ -10,6 +10,16 @@ import time
 
 #I: C'est quoi cron?
 
+##Type numerotation choisie pour les PIN
+GPIO.setmode(GPIO.BOARD)
+##Test Pin is 7
+GPIO.setup(7, GPIO.OUT)
+##Test Pin is 3
+GPIO.setup(3, GPIO.OUT)
+##Test Pin is 5
+GPIO.setup(5, GPIO.OUT)
+
+
 while True:
     getWeatherMontreal()
     getISSMontreal()

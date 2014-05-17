@@ -6,10 +6,7 @@ import os, datetime
 import RPi.GPIO as GPIO
 import time
 
-##Type numerotation choisie pour les PIN
-GPIO.setmode(GPIO.BOARD)
-##Test Pin is 3
-GPIO.setup(3, GPIO.OUT)
+
 
 # Function to get the weather in Montreal
 def getISSMontreal() :
