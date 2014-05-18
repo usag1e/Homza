@@ -11,8 +11,6 @@ import RPi.GPIO as GPIO
 
 #I: C'est quoi cron?
 
-GPIO.setmode(GPIO.BOARD)
-
 while True:
     getWeatherMontreal()
     getISSMontreal()
