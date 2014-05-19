@@ -13,3 +13,5 @@ def getTransportationInfoMontreal() :
     GPIO.cleanup()
 
 # Ce bout fonctionne, et telecharge dans le dossier ou se trouve Transportation.py le fichier Montreal.zip qui contient les horaires et tout
+def displayTransportation() :
+    # READ DATABASE AND TREAT THE DATA

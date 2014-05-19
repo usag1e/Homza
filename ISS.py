@@ -6,27 +6,26 @@ import os, datetime
 import RPi.GPIO as GPIO
 import time
 
-#GPIO.setmode(GPIO.BOARD)
-
-
 # Function to get the weather in Montreal
 def getISSMontreal() :
-	GPIO.setup(3, GPIO.OUT)
-    #Requesting ISS from Open-notify.org for Montreal, in .json
+    # Requesting ISS from Open-notify.org for Montreal, in .json
     l = requests.get('http://api.open-notify.org/iss-pass.json?lat=45.5&lon=73.567')
-    #extracting the .json data from the request
+    # extracting the .json data from the request
     lj = l.json
-    #Printing the whole .json thing, with pprint() 'cause they say it's nicer
-    #pprint(lj)
-    #The API gives the date and time back as UNIX time, it must be converted, here we select the date from the json answer
+    # Printing the whole .json thing, with pprint() 'cause they say it's nicer
+    # pprint(lj)
+    # The API gives the date and time back as UNIX time, it must be converted, here we select the date from the json answer
     Date = lj['response'][0]['risetime']
-    #Here we convert the UNIX answer to normal date and time
-    print('The ISS will be visible at', datetime.datetime.fromtimestamp(Date).strftime("%R:%S, %B %d, %Y"))
-    Date = datetime.datetime.fromtimestamp(Date)
-    #The duration is given in seconds by the API, here we select the duration from the json answer
+    # Here we convert the UNIX answer to normal date and time
+    # print('The ISS will be visible at', datetime.datetime.fromtimestamp(Date).strftime("%R:%S, %B %d, %Y"))
+    # Date = datetime.datetime.fromtimestamp(Date)
+    # The duration is given in seconds by the API, here we select the duration from the json answer
     Duration = lj['response'][0]['duration']
-    print('The ISS will be visible for', Duration, 'seconds')
+    # print('The ISS will be visible for', Duration, 'seconds')
+    insertIss( Date, Duration )
     
+def displayISS() :
+    # READ DATABASE HERE
     #This section uses time stamps to determine if the ISS is currently in the air
     now = datetime.datetime.now()
     if Date.month == now.month:

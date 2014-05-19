@@ -40,18 +40,18 @@ def getDurationOfTravelFromHomeTo( position ):
 #position2.lon = -7.27294922
 #getDurationOfTravel( position1, position2 )
 
-r = requests.get(r'http://jsonip.com')
-ip= r.json()['ip']
-print 'Your IP is', ip 
-
-
-gi = pygeoip.GeoIP('GeoIP.dat')
-#GeoIP.dat is necessary for country finding
-print "Country=", gi.country_name_by_addr(ip)
-
-gi = pygeoip.GeoIP('GeoLiteCity.dat')
-gi = r.json()['city']
-print "City=", gi.record_by_addr(ip)
+# r = requests.get(r'http://jsonip.com')
+# ip= r.json()['ip']
+# print 'Your IP is', ip 
+# 
+# 
+# gi = pygeoip.GeoIP('GeoIP.dat')
+# #GeoIP.dat is necessary for country finding
+# print "Country=", gi.country_name_by_addr(ip)
+# 
+# gi = pygeoip.GeoIP('GeoLiteCity.dat')
+# gi = r.json()['city']
+# print "City=", gi.record_by_addr(ip)
 
 #def get_IP_location( IP ):
   

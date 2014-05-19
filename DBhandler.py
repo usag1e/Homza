@@ -10,25 +10,28 @@ def closeDBConnection( connection ):
     if connection:
             connection.close()
 
-def executeOnDB( query ):
+def executeOnDB(connection, query ):
     try:
-        connection = connectToDB()
-        
 	cursor = connection.cursor(mdb.cursors.DictCursor)
+	print( query )
 	cursor.execute( query )
 
 	rows = cursor.fetchall()
+	print rows
 
-    except _mysql.Error, e:
-        print "Error %d: %s" % (e.args[0], e.args[1])
+	if len( rows ) == 0:
+	    return None
+	elif len( rows ) == 1:
+	    return rows[0]
+	else:
+	    return rows
+
+    except mdb.Error, e:
+        print "[Error] %d: %s" % (e.args[0], e.args[1])
         sys.exit(1)
 
     finally:
-        closeDBConnection( connection )
-	if len( rows ) > 1:
-	    return rows 
-	else:
-	    return rows[0]
+	closeDBConnection( connection )
 
 def display( result_of_query ):
     if type( result_of_query ) is list:
@@ -45,6 +48,21 @@ def translateToPosition( tuple ):
     position.lon = tuple["longitude"]
     return position
 
-def getHomeFromDB():
-    return translateToPosition( executeOnDB( "SELECT positions.latitude, positions.longitude FROM locations JOIN positions ON locations.position_id=positions.id WHERE locations.name = 'home';" ) )
+def getHomeFromDB( connection ):
+    return translateToPosition( executeOnDB( connection, "SELECT positions.latitude, positions.longitude FROM locations JOIN positions ON locations.position_id=positions.id WHERE locations.name = 'home';" ) )
 
+def insertIss( connection, Date, Duration ):
+    executeOnDB( connection, "INSERT INTO iss (timestamp, date, duration) VALUES (NOW(), FROM_UNIXTIME(%s), '%s');" % ( Date, Duration ) );
+
+def insertTransport( connection, line, direction, time, location_id ):
+    executeOnDB( connection, "INSERT INTO transportation (timestamp, line, direction, time_of_arrival, location_id ) VALUES (CURTIME(), %s, %s, %s, %d);" % (line, direction, time, location_id) )
+
+def addLocationByPosition( connection, name, lat, lon, is_transportation ):
+    executeOnDB( connection, "INSERT INTO positions (latitude, longitude) VALUES ('%s', '%s');" % ( lat, lon ) )
+    tuple = executeOnDB( connection, "SELECT id FROM positions WHERE latitude = '%s' AND longitude = '%s';" % ( lat, lon ) )
+    id = tuple[ 'id' ]
+    print id
+    executeOnDB( connection, "INSERT INTO locations (name, position_id, is_transportation_stop) VALUES (%s, %d, %s);" % (name, id, is_transportation) )
+
+connection = connectToDB()
+insertIss( connection, '1400538608', '123' )
