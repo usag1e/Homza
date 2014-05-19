@@ -12,26 +12,26 @@ def closeDBConnection( connection ):
 
 def executeOnDB(connection, query ):
     try:
-	cursor = connection.cursor(mdb.cursors.DictCursor)
-	print( query )
-	cursor.execute( query )
-
-	rows = cursor.fetchall()
-	print rows
-
-	if len( rows ) == 0:
-	    return None
-	elif len( rows ) == 1:
-	    return rows[0]
-	else:
-	    return rows
-
+        cursor = connection.cursor(mdb.cursors.DictCursor)
+        print( query )
+        cursor.execute( query )
+    
+        rows = cursor.fetchall()
+        print rows
+    
+        if len( rows ) == 0:
+            return None
+        elif len( rows ) == 1:
+            return rows[0]
+        else:
+            return rows
+    
     except mdb.Error, e:
         print "[Error] %d: %s" % (e.args[0], e.args[1])
         sys.exit(1)
-
+    
     finally:
-	closeDBConnection( connection )
+        closeDBConnection( connection )
 
 def display( result_of_query ):
     if type( result_of_query ) is list:
