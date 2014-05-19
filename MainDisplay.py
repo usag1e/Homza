@@ -11,3 +11,7 @@ GPIO.setup( 9, GPIO.OUT )
 # Internet
 GPIO.setup( 11, GPIO.OUT )
 
+# Check infos in the DB regularly
+
+# Clean
+GPIO.cleanup()
