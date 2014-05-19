@@ -47,5 +47,3 @@ def displayISS() :
       else:
 	print('3 is OFF')
 	GPIO.output(3, False)  
-    GPIO.cleanup()
-
