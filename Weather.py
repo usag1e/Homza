@@ -10,8 +10,6 @@ import time
 def getWeatherMontreal():
 	GPIO.setup(7, GPIO.OUT)
    	#Requesting weather from OpenWeatherMap for Montreal, in .json
-    	r = requests.get('http://api.openweathermap.org/data/2.5/weather?q=Montreal&mode=json&units=metric
-    	#Requesting weather from OpenWeatherMap for Montreal, in .json
    	r = requests.get('http://api.openweathermap.org/data/2.5/weather?q=Montreal&mode=json&units=metric')
     	#extracting the .json data from the request
     	rj = r.json
