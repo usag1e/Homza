@@ -13,11 +13,11 @@ def closeDBConnection( connection ):
 def executeOnDB(connection, query ):
     try:
         cursor = connection.cursor(mdb.cursors.DictCursor)
-        print( query )
+        print( "[DB] %s" % query )
         cursor.execute( query )
     
         rows = cursor.fetchall()
-        print rows
+        print "[DB] %s" % rows
     
         if len( rows ) == 0:
             return None
@@ -48,8 +48,12 @@ def translateToPosition( tuple ):
     position.lon = tuple["longitude"]
     return position
 
-def getHomeFromDB( connection ):
-    return translateToPosition( executeOnDB( connection, "SELECT positions.latitude, positions.longitude FROM locations JOIN positions ON locations.position_id=positions.id WHERE locations.name = 'home';" ) )
+def getHomeFromDB():
+    connection = connectToDB()
+    with connection:
+	 position = translateToPosition( executeOnDB( connection, "SELECT positions.latitude, positions.longitude FROM locations JOIN positions ON locations.position_id=positions.id WHERE locations.name = 'home';" ) )
+    closeDBConnection( connection )
+    return position
 
 def insertIss( Date, Duration ):
     connection = connectToDB()

@@ -1,5 +1,7 @@
 #This one is necessary to print in a pretty way the .json answer. It's only for testing purpose.
 from pprint import pprint
+from position import Position
+from DBhandler import *
 import requests
 #This one is necessary to convert the time sent by the API in UNIX to normal date and time
 import os, datetime
@@ -8,12 +10,15 @@ import time
 
 # Function to get the weather in Montreal
 def getISSMontreal() :
+    home = getHomeFromDB()
     # Requesting ISS from Open-notify.org for Montreal, in .json
-    l = requests.get('http://api.open-notify.org/iss-pass.json?lat=45.5&lon=73.567')
+    request_url = 'http://api.open-notify.org/iss-pass.json?lat=%s&lon=%s' % (home.lat, home.lon)
+    print request_url
+    l = requests.get( request_url )
     # extracting the .json data from the request
     lj = l.json
     # Printing the whole .json thing, with pprint() 'cause they say it's nicer
-    # pprint(lj)
+    print(lj)
     # The API gives the date and time back as UNIX time, it must be converted, here we select the date from the json answer
     Date = lj['response'][0]['risetime']
     # Here we convert the UNIX answer to normal date and time
@@ -47,3 +52,5 @@ def displayISS() :
       else:
 	print('3 is OFF')
 	GPIO.output(3, False)  
+
+getISSMontreal()
