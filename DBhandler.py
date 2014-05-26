@@ -17,13 +17,14 @@ def executeOnDB(connection, query ):
         cursor.execute( query )
     
         rows = cursor.fetchall()
-        print "[DB] %s" % rows
     
         if len( rows ) == 0:
             return None
         elif len( rows ) == 1:
+            print "[DB] %s" % rows
             return rows[0]
         else:
+            print "[DB] %s" % rows
             return rows
     
     except mdb.Error, e:
@@ -44,8 +45,8 @@ def display( result_of_query ):
 # Treatment functions
 def translateToPosition( tuple ):
     position = Position()
-    position.lat = tuple["latitude"]
-    position.lon = tuple["longitude"]
+    position.lat = tuple[ "latitude" ]
+    position.lon = tuple[ "longitude" ]
     return position
 
 def getHomeFromDB():
@@ -58,13 +59,36 @@ def getHomeFromDB():
 def insertIss( Date, Duration ):
     connection = connectToDB()
     with connection:
-	executeOnDB( connection, "INSERT INTO iss (timestamp, date, duration) VALUES (NOW(), FROM_UNIXTIME(%s), '%s');" % ( Date, Duration ) );
+	executeOnDB( connection, "INSERT INTO iss ( timestamp, date, duration ) VALUES ( NOW(), FROM_UNIXTIME( %s ), '%s' );" % ( Date, Duration ) );
     closeDBConnection( connection )
+
+def getIssDateFromDB():
+    connection = connectToDB()
+    with connection:
+	issInfo = executeOnDB( connection, "SELECT date FROM iss ORDER BY timestamp DESC LIMIT 1;" );
+    closeDBConnection( connection )
+    return issInfo
+
+def getIssDurationFromDB( date ):
+    connection = connectToDB()
+    with connection:
+	issInfo = executeOnDB( connection, "SELECT duration FROM iss WHERE date = '%s' ORDER BY timestamp DESC LIMIT 1;" % date );
+    closeDBConnection( connection )
+    return issInfo
 
 def insertTransport( line, direction, time, location_id ):
     connection = connectToDB()
     with connection:
-	executeOnDB( connection, "INSERT INTO transportation (timestamp, line, direction, time_of_arrival, location_id ) VALUES (CURTIME(), %s, %s, %s, %d);" % (line, direction, time, location_id) )
+	executeOnDB( connection, "INSERT INTO transportation ( timestamp, line, direction, time_of_arrival, location_id ) VALUES ( CURTIME(), %s, %s, %s, %d );" % ( line, direction, time, location_id ) )
+    closeDBConnection( connection )
+
+def insertInternet( trueOrFalse ):
+    connection = connectToDB()
+    with connection:
+	if trueOrFalse == True:
+	    executeOnDB( connection, "INSERT INTO internet (timestamp, connected ) VALUES (CURTIME(), 1);" )
+	else:
+	    executeOnDB( connection, "INSERT INTO internet (timestamp, connected ) VALUES (CURTIME(), 0);" )
     closeDBConnection( connection )
 
 def addLocationByPosition( name, lat, lon, is_transportation ):

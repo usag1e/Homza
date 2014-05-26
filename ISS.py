@@ -1,24 +1,22 @@
 #This one is necessary to print in a pretty way the .json answer. It's only for testing purpose.
 from pprint import pprint
-from position import Position
-from DBhandler import *
+from DBhandler import getHomeFromDB, insertIss, getIssDateFromDB, getIssDurationFromDB
 import requests
 #This one is necessary to convert the time sent by the API in UNIX to normal date and time
-import os, datetime
+import datetime
 import RPi.GPIO as GPIO
-import time
 
 # Function to get the weather in Montreal
-def getISSMontreal() :
+def getISS() :
     home = getHomeFromDB()
     # Requesting ISS from Open-notify.org for Montreal, in .json
     request_url = 'http://api.open-notify.org/iss-pass.json?lat=%s&lon=%s' % (home.lat, home.lon)
     print request_url
     l = requests.get( request_url )
     # extracting the .json data from the request
-    lj = l.json
+    lj = l.json()
     # Printing the whole .json thing, with pprint() 'cause they say it's nicer
-    print(lj)
+    pprint(lj)
     # The API gives the date and time back as UNIX time, it must be converted, here we select the date from the json answer
     Date = lj['response'][0]['risetime']
     # Here we convert the UNIX answer to normal date and time
@@ -30,11 +28,12 @@ def getISSMontreal() :
     insertIss( Date, Duration )
     
 def displayISS() :
-    # READ DATABASE HERE
+    iss_date = getIssDateFromDB()
     #This section uses time stamps to determine if the ISS is currently in the air
     now = datetime.datetime.now()
     if Date.month == now.month:
       if Date.day == now.day:
+	iss_duration = getIssDurationFromDB()
 	nowsum = (now.hour*3600 + now.minute*60 + now.second)
 	Datesum = (Date.hour*3600 + Date.minute*60 + Date.second)
 	#print(nowsum)
@@ -53,4 +52,3 @@ def displayISS() :
 	print('3 is OFF')
 	GPIO.output(3, False)  
 
-getISSMontreal()

@@ -1,11 +1,7 @@
-from Weather import getWeatherMontreal
-from ISS import getISSMontreal
-from Internet import CheckInternet
-import Internet
-import time
+from Weather import getWeather
+from ISS import getISS
 
 # This file will be regularly called by cron
 
-getWeatherMontreal()
-getISSMontreal()
-CheckInternet(5)
+getWeather()
+getISS()

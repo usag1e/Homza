@@ -2,17 +2,17 @@ from pprint import pprint
 import requests
 import RPi.GPIO as GPIO
 import time
+from DBhandler import getHomeFromDB
 
 # Function to get the weather in Montreal
-def getWeatherMontreal():
+def getWeather():
+    home = getHomeFromDB()
     # Requesting weather from OpenWeatherMap for Montreal, in .json
-    r = requests.get('http://api.openweathermap.org/data/2.5/weather?q=Montreal&mode=json&units=metric
-    #Requesting weather from OpenWeatherMap for Montreal, in .json
-    r = requests.get('http://api.openweathermap.org/data/2.5/weather?q=Montreal&mode=json&units=metric')
+    r = requests.get('http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&mode=json&units=metric' % ( home.lat, home.lon ) )
     #extracting the .json data from the request
-    rj = r.json
+    rj = r.json()
     #Printing the whole .json thing, with pprint() 'cause they say it's nicer
-    #pprint(rj)
+    pprint(rj)
     #Temperature is called 'temp' and indented in 'main', we retrieve it
     temperature = rj['main']['temp']
     print('The temperature in Montreal is:', temperature)
