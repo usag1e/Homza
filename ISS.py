@@ -11,24 +11,26 @@ def getISS() :
     home = getHomeFromDB()
     # Requesting ISS from Open-notify.org for Montreal, in .json
     request_url = 'http://api.open-notify.org/iss-pass.json?lat=%s&lon=%s' % (home.lat, home.lon)
-    print request_url
+    # print request_url
     l = requests.get( request_url )
     # extracting the .json data from the request
     lj = l.json()
     # Printing the whole .json thing, with pprint() 'cause they say it's nicer
-    pprint(lj)
-    # The API gives the date and time back as UNIX time, it must be converted, here we select the date from the json answer
-    Date = lj['response'][0]['risetime']
-    # Here we convert the UNIX answer to normal date and time
-    # print('The ISS will be visible at', datetime.datetime.fromtimestamp(Date).strftime("%R:%S, %B %d, %Y"))
-    # Date = datetime.datetime.fromtimestamp(Date)
-    # The duration is given in seconds by the API, here we select the duration from the json answer
-    Duration = lj['response'][0]['duration']
-    # print('The ISS will be visible for', Duration, 'seconds')
-    insertIss( Date, Duration )
+    # pprint(lj)
+    for response in lj[ 'response' ]:
+	# The API gives the date and time back as UNIX time, it must be converted, here we select the date from the json answer
+	Date = response[ 'risetime' ]
+	# Here we convert the UNIX answer to normal date and time
+	# print('The ISS will be visible at', datetime.datetime.fromtimestamp(Date).strftime("%R:%S, %B %d, %Y"))
+	# Date = datetime.datetime.fromtimestamp(Date)
+	# The duration is given in seconds by the API, here we select the duration from the json answer
+	Duration = response[ 'duration' ]
+	# print('The ISS will be visible for', Duration, 'seconds')
+	insertIss( Date, Duration )
     
-def displayISS() :
+def displayISS( X ) :
     iss_date = getIssDateFromDB()
+    print iss_date
     #This section uses time stamps to determine if the ISS is currently in the air
     now = datetime.datetime.now()
     if Date.month == now.month:
@@ -41,14 +43,12 @@ def displayISS() :
 	Diff = nowsum - Datesum
 	#print(Diff)
 	if Diff > 0:
-	  print('THE ISS IS VISIBLE NOW')
-	  print('3 is ON')
-	  GPIO.output(3,True)
+	  print( '[ISS] The ISS is visible now - %d is ON' % X )
+	  GPIO.output( X, True )
 	else:
-	  print('ISS currently not visible')
-	  print('3 is OFF')
-	  GPIO.output(3, False)
+	  print( '[ISS] The ISS is not visible now - %d is OFF' % X )
+	  GPIO.output( X, False )
       else:
-	print('3 is OFF')
-	GPIO.output(3, False)  
+	print( '[ISS] Today is not a good day - %d is OFF' % X )
+	GPIO.output( X, False )  
 

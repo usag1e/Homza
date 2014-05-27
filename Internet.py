@@ -15,13 +15,11 @@ def checkConnection():
 	insertInternet( True )
         return True
 
-def displayInternet(X):
+def displayInternet( X ):
     isConnected = checkConnection()
     if( isConnected == False ):
 	print "[Internet] Not connected - %d is OFF" % X
-	GPIO.output(X, False)
-	time.sleep(2)
+	GPIO.output( X, False )
     else:
 	print "[Internet] Connected - %d is ON" % X
-	GPIO.output(X, True)
-	time.sleep(2)
+	GPIO.output( X, True )

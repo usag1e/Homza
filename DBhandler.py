@@ -31,9 +31,6 @@ def executeOnDB(connection, query ):
         print "[Error] %d: %s" % (e.args[0], e.args[1])
         sys.exit(1)
     
-#    finally:
-#        closeDBConnection( connection )
-
 def display( result_of_query ):
     if type( result_of_query ) is list:
 	print len( result_of_query )+" results in query"
@@ -59,13 +56,13 @@ def getHomeFromDB():
 def insertIss( Date, Duration ):
     connection = connectToDB()
     with connection:
-	executeOnDB( connection, "INSERT INTO iss ( timestamp, date, duration ) VALUES ( NOW(), FROM_UNIXTIME( %s ), '%s' );" % ( Date, Duration ) );
+	executeOnDB( connection, "INSERT IGNORE INTO iss ( timestamp, date, duration ) VALUES ( NOW(), FROM_UNIXTIME( %s ), '%s' );" % ( Date, Duration ) );
     closeDBConnection( connection )
 
 def getIssDateFromDB():
     connection = connectToDB()
     with connection:
-	issInfo = executeOnDB( connection, "SELECT date FROM iss ORDER BY timestamp DESC LIMIT 1;" );
+	issInfo = executeOnDB( connection, "SELECT date FROM iss WHERE date > NOW() ORDER BY date ASC LIMIT 1;" );
     closeDBConnection( connection )
     return issInfo
 
@@ -101,4 +98,18 @@ def addLocationByPosition( name, lat, lon, is_transportation ):
 	print id
 	executeOnDB( connection, "INSERT INTO locations (name, position_id, is_transportation_stop) VALUES ('%s', %d, '%s');" % (name, id, is_transportation) )
     closeDBConnection( connection )
+
+def getTemperatureFromDB():
+    connection = connectToDB()
+    with connection:
+	temp = executeOnDB( connection, "SELECT temperature FROM weather ORDER BY timestamp ASC LIMIT 1;" )
+    closeDBConnection( connection )
+    return temp
+
+def insertWeather( id_station, name_station, clouds, time, humidity, pressure, temp, temp_max, temp_min, rainPerHour, sunrise, sunset, weather, description, icon, wind_deg, wind_speed ):
+    connection = connectToDB()
+    with connection:
+	executeOnDB( connection, "INSERT INTO weather ( timestamp, id_station, name_station, clouds, time, humidity, pressure, temp, temp_max, temp_min, rain, sunrise, sunset, weather, description, icon, wind_deg, wind_speed ) VALUES ( NOW(), '%s', '%s', '%s', FROM_UNIXTIME( '%s' ), '%s', '%s', '%s', '%s', '%s', '%s', FROM_UNIXTIME( '%s' ), FROM_UNIXTIME( '%s' ), '%s', '%s', '%s', '%s', '%s' );" % ( id_station, name_station, clouds, time, humidity, pressure, temp, temp_max, temp_min, rainPerHour, sunrise, sunset, weather, description, icon, wind_deg, wind_speed ) )
+    closeDBConnection( connection )
+    
 
