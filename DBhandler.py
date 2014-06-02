@@ -62,30 +62,30 @@ def insertIss( Date, Duration ):
 def getIssDateFromDB():
     connection = connectToDB()
     with connection:
-	issInfo = executeOnDB( connection, "SELECT date FROM iss WHERE date > NOW() ORDER BY date ASC LIMIT 1;" );
+	issInfo = executeOnDB( connection, "SELECT date FROM iss WHERE date < NOW() ORDER BY date DESC LIMIT 1;" );
     closeDBConnection( connection )
     return issInfo
 
 def getIssDurationFromDB( date ):
     connection = connectToDB()
     with connection:
-	issInfo = executeOnDB( connection, "SELECT duration FROM iss WHERE date = '%s' ORDER BY timestamp DESC LIMIT 1;" % date );
+	issInfo = executeOnDB( connection, "SELECT duration FROM iss WHERE date = 'FROM_UNIXTIME( %s )' ORDER BY timestamp DESC LIMIT 1;" % date );
     closeDBConnection( connection )
     return issInfo
 
 def insertTransport( line, direction, time, location_id ):
     connection = connectToDB()
     with connection:
-	executeOnDB( connection, "INSERT INTO transportation ( timestamp, line, direction, time_of_arrival, location_id ) VALUES ( CURTIME(), %s, %s, %s, %d );" % ( line, direction, time, location_id ) )
+	executeOnDB( connection, "INSERT INTO transportation ( timestamp, line, direction, time_of_arrival, location_id ) VALUES ( NOW(), %s, %s, %s, %d );" % ( line, direction, time, location_id ) )
     closeDBConnection( connection )
 
 def insertInternet( trueOrFalse ):
     connection = connectToDB()
     with connection:
 	if trueOrFalse == True:
-	    executeOnDB( connection, "INSERT INTO internet (timestamp, connected ) VALUES (CURTIME(), 1);" )
+	    executeOnDB( connection, "INSERT INTO internet (timestamp, connected ) VALUES (NOW(), 1);" )
 	else:
-	    executeOnDB( connection, "INSERT INTO internet (timestamp, connected ) VALUES (CURTIME(), 0);" )
+	    executeOnDB( connection, "INSERT INTO internet (timestamp, connected ) VALUES (NOW(), 0);" )
     closeDBConnection( connection )
 
 def addLocationByPosition( name, lat, lon, is_transportation ):
@@ -102,7 +102,7 @@ def addLocationByPosition( name, lat, lon, is_transportation ):
 def getTemperatureFromDB():
     connection = connectToDB()
     with connection:
-	temp = executeOnDB( connection, "SELECT temperature FROM weather ORDER BY timestamp ASC LIMIT 1;" )
+	temp = executeOnDB( connection, "SELECT temp FROM weather ORDER BY timestamp ASC LIMIT 1;" )
     closeDBConnection( connection )
     return temp
 

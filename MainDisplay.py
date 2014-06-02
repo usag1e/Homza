@@ -10,14 +10,14 @@ interval_check_weather = 300
 interval_check_internet = 20
 XISS = 3
 XWeather = 5
-XTransportation = 7
-XInternet = 9
+XTransportation = 9
+XInternet = 7 
 # ISS
 GPIO.setup( XISS, GPIO.OUT )
 # Weather
 GPIO.setup( XWeather, GPIO.OUT )
 # Transportation
-GPIO.setup( XTransportation, GPIO.OUT )
+# GPIO.setup( XTransportation, GPIO.OUT )
 # Internet
 GPIO.setup( XInternet, GPIO.OUT )
 

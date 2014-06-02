@@ -1,0 +1,2 @@
+crontab -e 
+*/10 * * * * python <absolute path>/MainFetchInfos.py

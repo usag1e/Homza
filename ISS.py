@@ -4,6 +4,8 @@ from DBhandler import getHomeFromDB, insertIss, getIssDateFromDB, getIssDuration
 import requests
 #This one is necessary to convert the time sent by the API in UNIX to normal date and time
 import datetime
+import time
+import calendar
 import RPi.GPIO as GPIO
 
 # Function to get the weather in Montreal
@@ -29,26 +31,31 @@ def getISS() :
 	insertIss( Date, Duration )
     
 def displayISS( X ) :
-    iss_date = getIssDateFromDB()
-    print iss_date
-    #This section uses time stamps to determine if the ISS is currently in the air
-    now = datetime.datetime.now()
-    if Date.month == now.month:
-      if Date.day == now.day:
-	iss_duration = getIssDurationFromDB()
-	nowsum = (now.hour*3600 + now.minute*60 + now.second)
-	Datesum = (Date.hour*3600 + Date.minute*60 + Date.second)
-	#print(nowsum)
-	#print(Datesum)
-	Diff = nowsum - Datesum
-	#print(Diff)
-	if Diff > 0:
-	  print( '[ISS] The ISS is visible now - %d is ON' % X )
-	  GPIO.output( X, True )
-	else:
-	  print( '[ISS] The ISS is not visible now - %d is OFF' % X )
-	  GPIO.output( X, False )
-      else:
-	print( '[ISS] Today is not a good day - %d is OFF' % X )
-	GPIO.output( X, False )  
+    # Get the date just older than right now (so, the most recent past date)
+    iss_db_date = getIssDateFromDB()
+    if iss_db_date != None:
+	iss_date = [ 'date' ] 
+        # print iss_date
+        #This section uses time stamps to determine if the ISS is currently in the air
+        now = datetime.datetime.now()
+        if iss_date.month == now.month:
+          if iss_date.day == now.day:
+            timestamp_date = calendar.timegm( iss_date.timetuple() )
+            print timestamp_date
+            iss_duration = getIssDurationFromDB( timestamp_date )
+            timestamp_now = calendar.timegm( iss_date.timetuple() )
+            time_elapsed = ( timestamp_now - timestamp_date ) # (until positive : invisible) 
+            time_left = ( timestamp_date + duration ) - timestamp_now # (as long as is positive : visible)
+            if time_elapsed > 0 and time_left > 0:
+              print '[ISS] The ISS is visible now - %d is ON' % X 
+              print "[ISS] visible since %d s and %d s left" % ( time_elapsed, time_left ) 
+              GPIO.output( X, True )
+            else:
+              print '[ISS] The ISS is not visible now - %d is OFF' % X 
+              GPIO.output( X, False )
+          else:
+	    print '[ISS] Today is not a good day - %d is OFF' % X
+    else:
+	print '[ISS] No date could be retrieved'
+
 

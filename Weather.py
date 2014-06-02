@@ -16,6 +16,10 @@ def getWeather() :
     # Temperature is called 'temp' and indented in 'main', we retrieve it
     temperature = rj['main']['temp']
     print '[Weather] The temperature is:', temperature
+    
+    if 'rain' not in rj:
+	rj[ 'rain' ] = { '3h' : 0 }
+
     insertWeather( rj[ 'id' ], rj[ 'name' ], rj[ 'clouds' ][ 'all' ], rj[ 'dt' ], rj[ 'main' ][ 'humidity' ], rj[ 'main' ][ 'pressure' ], rj[ 'main' ][ 'temp' ], rj[ 'main' ][ 'temp_max' ], rj[ 'main' ][ 'temp_min' ], rj[ 'rain' ][ '3h' ], rj[ 'sys' ][ 'sunrise' ], rj[ 'sys' ][ 'sunset' ], rj[ 'weather' ][0][ 'main' ], rj[ 'weather' ][0][ 'description' ], rj[ 'weather' ][0][ 'icon' ], rj[ 'wind' ][ 'deg' ], rj[ 'wind' ][ 'speed' ] ) 
 
 def displayWeather( X ) :
