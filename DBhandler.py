@@ -62,14 +62,14 @@ def insertIss( Date, Duration ):
 def getIssDateFromDB():
     connection = connectToDB()
     with connection:
-	issInfo = executeOnDB( connection, "SELECT date FROM iss WHERE date < NOW() ORDER BY date DESC LIMIT 1;" );
+	issInfo = executeOnDB( connection, "SELECT id, date FROM iss WHERE date < NOW() ORDER BY date DESC LIMIT 1;" );
     closeDBConnection( connection )
     return issInfo
 
-def getIssDurationFromDB( date ):
+def getIssDurationFromDB( id ):
     connection = connectToDB()
     with connection:
-	issInfo = executeOnDB( connection, "SELECT duration FROM iss WHERE date = 'FROM_UNIXTIME( %s )' ORDER BY timestamp DESC LIMIT 1;" % date );
+	issInfo = executeOnDB( connection, "SELECT duration FROM iss WHERE id='%s' ORDER BY timestamp DESC LIMIT 1;" % id );
     closeDBConnection( connection )
     return issInfo
 

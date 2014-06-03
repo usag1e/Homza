@@ -3,11 +3,21 @@ from Weather import displayWeather
 from ISS import displayISS
 from Internet import displayInternet
 import time
+import signal
+import sys
+
+def signal_handler(signal, frame):
+    print('You pressed Ctrl+C! Bye :)')
+    # Clean
+    GPIO.cleanup()
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, signal_handler)
 
 GPIO.setmode( GPIO.BOARD )
 
-interval_check_weather = 300
-interval_check_internet = 20
+interval_check_weather = 120 # in seconds
+interval_check_internet = 5 # in seconds
 XISS = 3
 XWeather = 5
 XTransportation = 9
@@ -29,5 +39,3 @@ while 1:
 	displayInternet( XInternet )
 	time.sleep( interval_check_internet )
 
-# Clean
-GPIO.cleanup()
