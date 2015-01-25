@@ -13,3 +13,10 @@ You can then:
 sudo python testing_nmap.py
 ````
 The code is fully commented.
+
+# Installing couchdb
+````
+sudo apt-get install couchdb
+sudo pip install couchdb
+````
+
