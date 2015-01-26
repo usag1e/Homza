@@ -19,7 +19,7 @@ for host in nm.all_hosts():
 	# If the status of an element is not down, we print it
 	if nm[host]['status']['state'] != "down":
 		print 
-		print "(In IF loop)"
+		print nm[host]
 		print "IP ADDRESS:", host
 		print "STATUS:", nm[host]['status']['state']
 		try:
