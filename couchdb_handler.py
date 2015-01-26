@@ -127,16 +127,11 @@ def display_status():
 
 	
 
-
-
-
-
-
 def retrieve_time():
 	localtime=time.localtime()
 	timeString =time.strftime("%Y%m%d%H%M%S",localtime)
 	human_time=time.strftime("%Y/%m/%d  %H:%M:%S",localtime)
-	return human_time,timeString
+	return timeString
 
 def internet_on():
     try:
