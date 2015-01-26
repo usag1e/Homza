@@ -30,9 +30,11 @@ retrieve_user_for_mac( mac )
 
 
 #Update a user's last_seen_time
+
 update_last_seen_time( "ilyass", "now" )
 update_last_seen_time( "lussylver", "yesterday" )
 update_last_seen_time( "joe", "tomorrow" )
+
 
 #How to display data
 all_status = display_status()

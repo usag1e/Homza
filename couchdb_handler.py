@@ -1,5 +1,7 @@
 from couchdb import *
+import time
 from couchdb.design import ViewDefinition
+import urllib2
 
 # Creates a connection
 def connect_to_db():
@@ -67,8 +69,21 @@ def retrieve_user_for_mac( mac ):
 		if mac == row.key:
 			print
 			print mac, row.id
+			row_id = row.id
 	return row.id
 
+def check_users( address_mac, user_mac, unknown_mac ):
+#user_mac is a list of the people already registred in our DB
+	couch = connect_to_db()
+	db = create_or_load_db( couch, 'inhabitants' )
+	for row in db.view( "_design/list/_view/macs" ):
+		if address_mac == row.key:
+			user_mac.append(address_mac)
+			break
+		else:
+			unknown_mac.append(address_mac)
+			break
+			
 def update_last_seen_time( user, time ):
 	
 	#First you need to connect to CouchDB server
@@ -108,5 +123,16 @@ def display_status():
 
 
 
+def retrieve_time():
+	localtime=time.localtime()
+	timeString =time.strftime("%Y%m%d%H%M%S",localtime)
+	human_time=time.strftime("%Y/%m/%d  %H:%M:%S",localtime)
+	return human_time,timeString
 
+def internet_on():
+    try:
+        response=urllib2.urlopen('http://74.125.228.100',timeout=1)
+        return True
+    except urllib2.URLError as err: pass
+    return False
 
