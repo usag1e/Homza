@@ -57,10 +57,8 @@ def retrieve_user_for_mac( mac ):
 	db = create_or_load_db( couch, 'inhabitants' )	
 	for row in db.view( "_design/list/_view/macs" ):
 		if mac == row.key:
-			print
-			print mac, row.id
 			row_id = row.id
-	return row.id
+	return row_id
 
 def check_users( address_mac, user_mac, unknown_mac ):
 #user_mac is a list of the people already registred in our DB
@@ -73,6 +71,17 @@ def check_users( address_mac, user_mac, unknown_mac ):
 		else:
 			unknown_mac.append(address_mac)
 			break
+
+#Returns a list containing all known MAC addresses
+def retrieve_known_macs():
+	couch = connect_to_db()
+	db = create_or_load_db( couch, 'inhabitants' )
+	known_macs = []
+
+	for row in db.view( "_design/list/_view/macs" ):
+		known_macs.append( row.key )
+
+	return known_macs
 			
 def update_last_seen_time( user, time ):
 	
@@ -98,4 +107,12 @@ def internet_on():
         return True
     except urllib2.URLError as err: pass
     return False
+
+def compare_list(list1, list2):
+	list_common_macs=[]
+    	for i in range (0,len(list1)):
+		for j in range(0, len(list2)):
+			if list1[i]==list2[j]:
+				list_common_macs.append(list1[i])
+	return list_common_macs
 
