@@ -25,10 +25,10 @@ create_view_for_macs( )
 
 
 # Retrieve the user corresponding to a MAC address
-mac = "8C:3A:E3:3E:56:26"
+mac = "8C:3A:E3:3E:56:26" 
 retrieve_user_for_mac( mac )
 
 
 #Update a user's last_seen_time
-update_last_seen_time( "ilyass", "now" )
+update_last_seen_time( "ilyass", "today" )
 

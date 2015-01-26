@@ -26,4 +26,3 @@ for host in nm.all_hosts():
 			print "MAC ADDRESS:", nm[host]['addresses']['mac']
 		except:
 			mac = 'unknown'
-
