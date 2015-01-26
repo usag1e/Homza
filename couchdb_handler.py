@@ -49,6 +49,16 @@ def create_view_for_macs():
                  		emit( doc.macs[i], doc._id  );}
 			}''')
 	rpt_view.sync( db )
+	
+	rpt_view = ViewDefinition(
+			'list',
+			'last_seen',
+			'''function(doc) {
+				emit(doc.last_seen_time, doc._id);
+			}''')
+	rpt_view.sync( db )
+	
+
 
 def retrieve_user_for_mac( mac ):
 	#First you need to connect to CouchDB server
@@ -94,6 +104,33 @@ def update_last_seen_time( user, time ):
 	doc['last_seen_time'] = time
 
 	db.save(doc)
+	
+	
+def display_status():
+	couch = connect_to_db()
+	db = create_or_load_db(couch, 'inhabitants')
+	
+	
+	all_status=[]
+	for row in db.view('_design/list/_view/last_seen'):
+		list_user_status =[]
+		user = row.id
+		last_seen_time = row.key
+		
+		
+		list_user_status.append(user)
+		list_user_status.append(last_seen_time)
+		
+		all_status.append(list_user_status)
+		
+	return all_status
+
+	
+
+
+
+
+
 
 def retrieve_time():
 	localtime=time.localtime()
