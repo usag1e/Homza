@@ -1,0 +1,38 @@
+#!/bin/bash
+echo "Careful, with this script: "
+echo "# If -d is used : you will delete your /var/www symlink or move your /var/www folder to /var/www.bak and replace it by a symlink to this folder... "
+echo "# Else it will delete (if existing) the /var/www/${PWD##*/} symlink/file and create one that leads to this folder"
+echo "Press any key to continue, Ctrl+C to cancel."
+read -n 1 -s
+
+OUTPUT=1
+if [ "$1" == "-d" ]; then
+	sudo mv /var/www/ /var/www.bak/
+	sudo rm /var/www 
+	SOURCE="${BASH_SOURCE[0]}"
+	while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+	  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+	  SOURCE="$(readlink "$SOURCE")"
+	  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+	done
+	DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+	OUTPUT=`sudo ln -s $DIR /var/www`
+else
+	SOURCE="${BASH_SOURCE[0]}"
+	while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+	  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+	  SOURCE="$(readlink "$SOURCE")"
+	  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+	done
+	DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+	sudo rm /var/www/${PWD##*/}
+	OUTPUT=`sudo ln -s $DIR /var/www/${PWD##*/}`
+fi
+
+if [ "$OUTPUT" == 0 ]; then
+	echo "Open browser, and go to 127.0.0.1"
+else
+	echo $OUTPUT
+fi
+
