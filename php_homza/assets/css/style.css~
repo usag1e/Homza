@@ -177,7 +177,7 @@ nav {
 }
     
 #page{
-	width:900px;
+	width:1060px;
 	margin:50px auto;
 	height:auto;
 	box-sizing: border-box;

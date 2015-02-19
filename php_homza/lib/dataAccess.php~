@@ -18,7 +18,7 @@ function last_seen(){
 function secondsToTime($seconds) {
     $dtF = new DateTime("@0");
     $dtT = new DateTime("@$seconds");
-    return $dtF->diff($dtT)->format('%a jours, %h heures, %i minutes and %s secondes');
+    return $dtF->diff($dtT)->format('%a jours, %h heure, %i minutes and %s secondes');
 }
 
 
