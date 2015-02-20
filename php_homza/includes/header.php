@@ -10,7 +10,7 @@
         <div id="header">
 
             <div class="title">
-                <h1> H O M Z A </h1>
+                <h1> H O M Z A  (Beta)</h1>
             </div>
             <nav>
                 <ul class="navigation">
