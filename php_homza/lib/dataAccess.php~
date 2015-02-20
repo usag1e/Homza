@@ -19,7 +19,7 @@ function get_url_img(){
 	$db = initDb('inhabitants');
 	
 	$opts = array("descending" => true, "limit" => 30);
-	$view = $db->setQueryParameters($opts)->getView('list' , "url_img");
+	$view = $db->setQueryParameters($opts)->getView('list' , "name_url_last_seen");
 
 	return $view;
 }

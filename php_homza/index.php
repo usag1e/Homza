@@ -46,10 +46,9 @@ include('includes/header.php');
 					}else {
 						echo '<div class="img_out" style="background-image:url('.$url_img[1].')"></div>';
 					}
-				}			
+				}		
 			?>
-
-	<br /><h2> Last Seen </h2><br />
+	<h2> Last Seen </h2><br />
 			<?php
 				foreach ( $view1->rows as $row ){	
 					$word = $row->value;
@@ -58,9 +57,15 @@ include('includes/header.php');
 					$timestamp = strtotime($date);
 					$seen_since = $nowdate - $timestamp;
 					$nowdate = gmdate("Y-m-d H:i", $nowdate);
-					
 					$newDate = date("Y-m-d H:i", strtotime($date));
-					echo '<a href="detail_word.php?word='.$word.'">'.$word.'</a> : '.secondsToTime($seen_since).' ago ( '.$newDate.' )<br/>'; 
+
+					if ($seen_since < 300){
+						echo '<a href="detail_word.php?word='.$word.'">'.$word.'</a> : In da House ! ( '.secondsToTime($seen_since).' ) <br/>';
+					}elseif ($seen_since <900){
+						echo '<a href="detail_word.php?word='.$word.'">'.$word.'</a> : Should be around ... (less than 15 minutes ago) <br/>';
+					}else {
+						echo '<a href="detail_word.php?word='.$word.'">'.$word.'</a> : Out ! - '.secondsToTime($seen_since).' ago ( '.$newDate.' )<br/>';
+					}
 				}
 			?>
     </div>

@@ -59,6 +59,13 @@
     filter: alpha(opacity=40);
 }
 
+.img_out p {
+  text-align: center;
+  font-style: italic;
+  font-size: smaller;
+  text-indent: 1;
+}
+
 .clear{
 	clear:both;
 }
@@ -177,7 +184,7 @@ nav {
 }
     
 #page{
-	width:1060px;
+	width:900px;
 	margin:50px auto;
 	height:auto;
 	box-sizing: border-box;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
         <head>
-                <title> Homza </title>
+                <title> Homza (Béta) </title>
 
         </head>
 <body>
@@ -21,7 +21,7 @@
             </nav><div class="clear"></div>
         </div>
         <div id="desc">
-            <h1>the Room-matery</h1>
+            <h1>The Room-matery</h1>
         </div>
     </div>
     </header>
