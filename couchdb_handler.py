@@ -17,7 +17,7 @@ def create_or_load_db( couch, database_name ):
 	except ResourceNotFound:
 		return couch.create( database_name )
 
-def add_user( user, macs ):
+def add_user( user, macs , url_img ):
 	#First you need to connect to CouchDB server
 	couch = connect_to_db()
 	#Then load a databse in the object *db*
@@ -31,7 +31,8 @@ def add_user( user, macs ):
 	except ResourceNotFound:
 		dict_field_values = {
 			'_id'  : user,
-			'macs'  :macs
+			'macs'  :macs,
+			'url_img' : url_img
 		}
 		#The object *db* has a create method, and this is how you create a document
 		return db.create( dict_field_values )
@@ -57,7 +58,20 @@ def create_view_for_macs():
 				emit(doc.last_seen_time, doc._id);
 			}''')
 	rpt_view.sync( db )
-	
+	rpt_view = ViewDefinition(
+			'list',
+			'name_url_last_seen',
+			'''function(doc) {
+  				emit(doc.last_seen_time, [doc._id, doc.url_img]);
+			}''')
+	rpt_view.sync( db )
+	rpt_view = ViewDefinition(
+			'list',
+			'url_img',
+			'''function(doc) {
+				emit(doc.url_img, doc._id);
+			}''')
+	rpt_view.sync( db )
 
 
 def retrieve_user_for_mac( mac ):
@@ -147,4 +161,16 @@ def compare_list(list1, list2):
 			if list1[i]==list2[j]:
 				list_common_macs.append(list1[i])
 	return list_common_macs
+
+def url_img( user, url_img ):
+	
+	#First you need to connect to CouchDB server
+	couch = connect_to_db()
+	#Then load a databse in the object *db*
+	db = create_or_load_db( couch, 'inhabitants' )	
+
+	doc = db[ user ]
+	doc['url_img'] = url_img
+
+	db.save(doc)
 

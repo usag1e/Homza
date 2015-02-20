@@ -5,6 +5,7 @@
 	require_once 'lib/dataAccess.php';
 
 	$view1 = last_seen();
+	$view_img = get_url_img();
 
 	
 include('includes/header.php');
@@ -27,45 +28,41 @@ include('includes/header.php');
 	</head>
 	
 <body>
-
-	<div id="page">
-
-		<div class="img_in" style="background-image:url('https://lh4.googleusercontent.com/-yGbpROABGlw/UHFTVY4qQ9I/AAAAAAAAAKg/AiluU0GSaIE/w601-h602-no/IMG_3361.JPG');"></div> <!-- Yahya-->
-		<div class="img_out" style="background-image:url('https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xpf1/v/t1.0-9/p206x206/10464400_10152450938589754_9088480680765082395_n.jpg?oh=1ed8fd4b01afeebf28866ce098fb02c6&oe=55827C27&__gda__=1435651377_3946885bf0ad47479018f6c1b361c95e');"></div> <!-- Gael-->
-		<div class="img_just" style="background-image:url('https://lh6.googleusercontent.com/-wE_smH6tICw/ThTE50L4KNI/AAAAAAAASVI/M8LjNWA7dNs/w1051-h701-no/IMG_3687.JPG');"></div> <!-- Ilyass-->
-		<div class="img_in" style="background-image:url('https://lh6.googleusercontent.com/kY8GSNBoURvFIXX2ox55AmN1QF7p-RbZsOhw_QyRsw=w717-h701-no');"></div> <!-- Joe-->
-
-		<p style="clear: both;"> <!-- IMPORTANT: After the very last image -->
-
-	</div>
-
-
     <div id="page">
-
-            <h2>Last Seen</h2><br />
+	<h2> Who's UP ? </h2><br />
 			<?php
-				foreach ( $view1->rows as $row ){
+				
+				foreach ( $view_img->rows as $row){
+					$date =  $row->key;
+					$url_img =  $row->value;
+					$nowdate = time();
+					$timestamp = strtotime($date);
+					$seen_since = $nowdate - $timestamp;
+					if ($seen_since < 300){
+						echo '<div class="img_in" style="background-image:url('.$url_img[1].')"></div>';	
+					}elseif ($seen_since < 900){
+						echo '<div class="img_just
+" style="background-image:url('.$url_img[1].')"></div>';
+					}else {
+						echo '<div class="img_out" style="background-image:url('.$url_img[1].')"></div>';
+					}
+				}			
+			?>
+
+	<br /><h2> Last Seen </h2><br />
+			<?php
+				foreach ( $view1->rows as $row ){	
 					$word = $row->value;
 					$date = $row->key;
-					
 					$nowdate = time();
 					$timestamp = strtotime($date);
 					$seen_since = $nowdate - $timestamp;
 					$nowdate = gmdate("Y-m-d H:i", $nowdate);
 					
 					$newDate = date("Y-m-d H:i", strtotime($date));
-					
-					echo '<a href="detail_word.php?word='.$word.'">'.$word.'</a> : '.secondsToTime($seen_since).' ago ( '.$newDate.' )<br/>';
-
-
-					
-				} 
-?>
-
+					echo '<a href="detail_word.php?word='.$word.'">'.$word.'</a> : '.secondsToTime($seen_since).' ago ( '.$newDate.' )<br/>'; 
+				}
+			?>
     </div>
-
-
-
-
 </body>
 </html>

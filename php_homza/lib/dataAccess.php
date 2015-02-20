@@ -15,12 +15,20 @@ function last_seen(){
 	return $view;
 }
 
+function get_url_img(){
+	$db = initDb('inhabitants');
+	
+	$opts = array("descending" => true, "limit" => 30);
+	$view = $db->setQueryParameters($opts)->getView('list' , "name_url_last_seen");
+
+	return $view;
+}
+
 function secondsToTime($seconds) {
     $dtF = new DateTime("@0");
     $dtT = new DateTime("@$seconds");
     return $dtF->diff($dtT)->format('%a jours, %h heures, %i minutes and %s secondes');
 }
-
 
 
 ?>
