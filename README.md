@@ -35,3 +35,25 @@ Then go to the folder /php_homza and:
 ./deploy
 ````
 Open your favorite browser, go to 127.0.0.1
+
+# How to run a program in background
+````
+If you wish to run a program in background, you have to end the command with "&".
+script.py &
+
+If you want to continue this job after you log out from your terminal, you can prefix with nohup
+nohup script.py &
+
+````
+# How to allow your Apache server work on raspberry (to process php files)
+````
+
+You'll need to install PHP5 and the PHP5 module for Apache. Type the following command to install these:
+
+sudo apt-get install php5 libapache2-mod-php5 -y
+Now remove the index.html file:
+
+sudo rm index.html
+and create the file index.php:
+
+sudo nano index.php
