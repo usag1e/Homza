@@ -39,11 +39,12 @@ Open your favorite browser, go to 127.0.0.1
 # How to run a program in background
 ````
 If you wish to run a program in background, you have to end the command with "&".
+````
 script.py &
-
+````
 If you want to continue this job after you log out from your terminal, you can prefix with nohup
+````
 nohup script.py &
-
 ````
 # How to allow your Apache server work on raspberry (to process php files)
 
