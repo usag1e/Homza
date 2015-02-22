@@ -37,7 +37,6 @@ Then go to the folder /php_homza and:
 Open your favorite browser, go to 127.0.0.1
 
 # How to run a program in background
-````
 If you wish to run a program in background, you have to end the command with "&".
 ````
 script.py &
