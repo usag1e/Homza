@@ -46,14 +46,16 @@ nohup script.py &
 
 ````
 # How to allow your Apache server work on raspberry (to process php files)
-````
 
 You'll need to install PHP5 and the PHP5 module for Apache. Type the following command to install these:
-
+````
 sudo apt-get install php5 libapache2-mod-php5 -y
+````
 Now remove the index.html file:
-
+````
 sudo rm index.html
+````
 and create the file index.php:
-
+````
 sudo nano index.php
+````
