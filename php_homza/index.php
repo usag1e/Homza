@@ -29,6 +29,7 @@ include('includes/header.php');
 	
 <body>
     <div id="page">
+    <div>
 	<h2> Who's UP ? </h2><br />
 			<?php
 				
@@ -48,6 +49,8 @@ include('includes/header.php');
 					}
 				}		
 			?>
+    </div>
+    <div>
 	<h2> Last Seen </h2><br />
 			<?php
 				foreach ( $view1->rows as $row ){	
@@ -68,6 +71,7 @@ include('includes/header.php');
 					}
 				}
 			?>
+    </div>
     </div>
 </body>
 </html>
