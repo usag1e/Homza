@@ -1,4 +1,4 @@
-#You absolutely need these 2 imports at the beginning of your script to be able to use these functions, also you mest be in the same folder
+#You absolutely need these 2 imports at the beginning of your script to be able to use these functions, also you must be in the same folder
 from couchdb_handler import *
 import couchdb
 

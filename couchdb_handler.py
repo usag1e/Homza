@@ -118,7 +118,7 @@ def update_last_seen_time( user, time ):
 	doc['last_seen_time'] = time
 
 	db.save(doc)
-	
+	db.compact()
 	
 def display_status():
 	couch = connect_to_db()
@@ -173,4 +173,5 @@ def url_img( user, url_img ):
 	doc['url_img'] = url_img
 
 	db.save(doc)
+	db.compact()
 
