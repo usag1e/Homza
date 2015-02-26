@@ -2,6 +2,7 @@
 from couchdb_handler import *
 import time
 import nmap
+from Internet import *
 
 #Initialisation
 user_mac=[]
@@ -19,9 +20,9 @@ while (a<1):
 	#We give the scan parameter, and perform the scan
 	nm.scan(hosts = '192.168.1.0/24', arguments = '-n -sP -PE -T5')
 	up_macs=[]
-	i=1
+
 	timeString = retrieve_time()
-	while i==1:
+	while ( checkConnection() == True ):
 		######### UPDATING DATABASE ##############
 		for host in nm.all_hosts():	
 		######### LIST MAC ADDRESS ################
@@ -57,7 +58,7 @@ while (a<1):
 
 
 		#Update a user's last_seen_time
-		i=i+1
+		
 		time.sleep(2)
 		print display_status()
 	print "~~~~~~~~~~~~~~~~~~~~~~~~~~~"
