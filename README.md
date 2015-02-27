@@ -59,3 +59,23 @@ and create the file index.php:
 ````
 sudo nano index.php
 ````
+# How to screen
+
+SSH connect the RPi, then:
+````
+screen
+````
+You are now inscide a screen, even if the SSh connection to the RPi is broken, you can reconnect to the RPi, and type:
+````
+screen -r
+````
+You will be able to check the running screens, and if several are running you will need to type:
+````
+screen -r  [screen name displayed after screen -r]
+````
+Example:
+````
+screen -r  31844.pts-0.office
+````
+
+
