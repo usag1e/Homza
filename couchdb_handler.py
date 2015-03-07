@@ -55,14 +55,14 @@ def create_view_for_macs():
 			'list',
 			'last_seen',
 			'''function(doc) {
-				emit(doc.last_seen_time, doc._id);
+				emit(doc.presence[doc.presence.length - 1], doc._id);
 			}''')
 	rpt_view.sync( db )
 	rpt_view = ViewDefinition(
 			'list',
 			'name_url_last_seen',
 			'''function(doc) {
-  				emit(doc.last_seen_time, [doc._id, doc.url_img]);
+  				emit(doc.presence[doc.presence.length - 1], [doc._id, doc.url_img]);
 			}''')
 	rpt_view.sync( db )
 	rpt_view = ViewDefinition(
@@ -115,8 +115,21 @@ def update_last_seen_time( user, time ):
 	db = create_or_load_db( couch, 'inhabitants' )	
 
 	doc = db[ user ]
-	doc['last_seen_time'] = time
-
+	try:
+		presence = doc['presence']
+		if len(presence) < 100:
+			presence.append( time )
+			doc['presence'] = presence
+		else:
+			new_presence = []
+			for i in range(0, 60):
+				new_presence.append( presence[i] )
+			new_presence.append( time )
+			doc['presence'] = new_presence
+	except:
+		presence = []
+		presence.append( time )
+		doc['presence'] = presence
 	db.save(doc)
 	db.compact()
 	
@@ -124,16 +137,14 @@ def display_status():
 	couch = connect_to_db()
 	db = create_or_load_db(couch, 'inhabitants')
 	
-	
 	all_status=[]
 	for row in db.view('_design/list/_view/last_seen'):
 		list_user_status =[]
 		user = row.id
-		last_seen_time = row.key
-		
+		presence = row.key
 		
 		list_user_status.append(user)
-		list_user_status.append(last_seen_time)
+		list_user_status.append(presence)
 		
 		all_status.append(list_user_status)
 		
