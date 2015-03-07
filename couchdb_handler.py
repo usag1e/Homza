@@ -32,7 +32,8 @@ def add_user( user, macs , url_img ):
 		dict_field_values = {
 			'_id'  : user,
 			'macs'  :macs,
-			'url_img' : url_img
+			'url_img' : url_img,
+			'last_played_music' : retrieve_time()
 		}
 		#The object *db* has a create method, and this is how you create a document
 		return db.create( dict_field_values )
@@ -122,8 +123,8 @@ def update_last_seen_time( user, time ):
 			doc['presence'] = presence
 		else:
 			new_presence = []
-			for i in range(0, 60):
-				new_presence.append( presence[i] )
+			for i in range(0, 50):
+				new_presence.append( presence[len(presence)-20 + i] )
 			new_presence.append( time )
 			doc['presence'] = new_presence
 	except:
@@ -186,3 +187,66 @@ def url_img( user, url_img ):
 	db.save(doc)
 	db.compact()
 
+def update_internet_status(connection_status):
+	#First you need to connect to CouchDB server
+	couch = connect_to_db()
+	#Then load a databse in the object *db*
+	db = create_or_load_db( couch, 'house_status' )	
+	try:
+		#You can then use the object *db* to directly check a document through its _id, remember that we use urls as ids since a url is unique
+		doc = db[ 'internet' ]
+		doc['status'] = connection_status
+		db.save(doc)
+		db.compact()
+	except ResourceNotFound:
+		dict_field_values = {
+			'_id'  : 'internet',
+			'status' : connection_status
+		}
+		#The object *db* has a create method, and this is how you create a document
+		return db.create( dict_field_values )
+
+def check_last_played_music_time(user):
+	couch = connect_to_db()
+	db = create_or_load_db( couch, 'inhabitants' )	
+	doc = db[ user ]
+	last_played_music = doc['last_played_music']
+	return last_played_music
+
+def update_last_played_music_time(user):
+	couch = connect_to_db()
+	db = create_or_load_db( couch, 'inhabitants' )	
+	doc = db[ user ]
+	doc['last_played_music'] = retrieve_time()
+	db.save(doc)
+	db.compact()
+	return last_played_music
+
+def inhabitant_just_arrived( user ):
+	couch = connect_to_db()
+	db = create_or_load_db( couch, 'inhabitants' )	
+	doc = db[ user ]
+	presence = doc['presence']
+	seconds_since_last_seen = time.mktime(time.strptime(presence[len(presence)-1], "%Y%m%d%H%M%S"))-time.mktime(time.localtime())
+	if seconds_since_last_seen < 30:
+		here = 0
+		not_here = 0
+		for i in range(0, len(presence)-2):
+			seconds_since_last_seen_temp = time.mktime(time.strptime(presence[i], "%Y%m%d%H%M%S"))-time.mktime(time.localtime())
+			if seconds_since_last_seen_temp > 900:
+				not_here = not_here + 1
+			else:
+				here = here + 1
+		if not_here > here:
+			seconds_since_last_music = time.mktime(time.strptime(check_last_played_music_time(user), "%Y%m%d%H%M%S"))-time.mktime(time.localtime())
+			if seconds_since_last_music > 900:
+				update_last_played_music_time(user)
+				return True
+			else:
+				return False
+		return False
+	else:
+		return False
+
+
+	

@@ -11,6 +11,7 @@ up_users=0
 main_up_users=[]
 
 main_unknown_users=[]
+update_internet_status(checkConnection())
 
 while True:
 	while (checkConnection() == True):
