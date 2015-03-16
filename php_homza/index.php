@@ -9,6 +9,7 @@
 
 	
 include('includes/header.php');
+echo "<meta http-equiv='refresh' content='10;url=http://192.168.1.109/php_homza'>";
 	
 ?><!DOCTYPE html>
 <html>
