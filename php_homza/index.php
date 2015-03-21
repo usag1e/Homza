@@ -28,7 +28,12 @@ echo "<meta http-equiv='refresh' content='10;url=http://192.168.1.109/php_homza'
                 <script src="http://cdn.oesmith.co.uk/morris-0.5.1.min.js"></script>
 
 	</head>
-	
+	<?php
+		echo "SSID : Torrieux " ;
+		echo "&nbsp;&nbsp;&nbsp;&nbsp;";
+		echo " Pswd : 4J3E8A7NBRILLANT";
+	?><br />
+<br />		
 <body>
     <div id="page">
     <div>
