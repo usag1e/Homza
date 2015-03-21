@@ -62,16 +62,23 @@ echo "<meta http-equiv='refresh' content='10;url=http://192.168.1.109/php_homza'
 					$seen_since = $nowdate - $timestamp;
 					$nowdate = gmdate("Y-m-d H:i", $nowdate);
 					$newDate = date("Y-m-d H:i", strtotime($date));
+					if ($last_seen_since<$seen_since){
+						$last_seen_since=$seen_since;
+						$last_recordman=$word;
+					}
 
 					if ($seen_since < 300){
-						echo '<a href="detail_word.php?word='.$word.'">'.$word.'</a> : In da House ! ( '.secondsToTime($seen_since).' ) <br/>';
+						echo '<a href="detail_word.php?word='.$word.'">'.$word.'</a> : In da House ! ( '.secondsToTime($seen_since).' )';
 					}elseif ($seen_since <900){
-						echo '<a href="detail_word.php?word='.$word.'">'.$word.'</a> : Should be around ... (less than 15 minutes ago) <br/>';
+						echo '<a href="detail_word.php?word='.$word.'">'.$word.'</a> : Should be around ... (less than 15 minutes ago)';
 					}else {
-						echo '<a href="detail_word.php?word='.$word.'">'.$word.'</a> : Out ! - '.secondsToTime($seen_since).' ago ( '.$newDate.' )<br/>';
+						echo '<a href="detail_word.php?word='.$word.'">'.$word.'</a> : Out ! - '.secondsToTime($seen_since).' ago ( '.$newDate.' )';
 					}
+				echo '- RECORD : '.$last_seen_since.'<br/>';
 				}
+				
 			?>
+		
     </div>
     </div>
 </body>
