@@ -6,6 +6,7 @@
 
 	$view1 = last_seen();
 	$view_img = get_url_img();
+	$view_house=get_printer_status();
 
 	
 include('includes/header.php');
@@ -76,10 +77,41 @@ echo "<meta http-equiv='refresh' content='10;url=http://192.168.1.109/php_homza'
 					}
 				echo ' - RECORD : '.$last_seen_since.' sec <br/>';
 				}
+			?>
+
+	</div>
+	<div>
+	<h2> Printer Status </h2><br />
+			<?php
+				$couch_dsn = "http://localhost:5984";
+				$couch_db = "_utils/database.html?house_status/_design/list/_view/printer";
+
+				require_once "./lib/couch.php";
+				require_once "./lib/couchClient.php";
+				require_once "./lib/couchDocument.php";
+		
+				$client = new couchClient($couch_dsn,$couch_db);
+				try {
+					$info = $client->getDatabaseInfos();
+				} catch (Exception $e) {
+					echo "Error:".$e->getMessage()." (errcode=".$e->getCode().")\n";
+					exit(1);
+				}
+				echo 'info'.$info.;
 				
 			?>
-		
-    </div>
-    </div>
+
+			<?php
+				echo ' - RECORD : '.$last_seen_since.' sec <br/>';
+				foreach ($view_house->rows as $row){
+					$status = $row->value;
+					$key = $row->key;
+					echo 'Status : ' .var$status. '<br/>';			
+				}
+			?>
+			
+    	
+	</div>
+</div>
 </body>
 </html>

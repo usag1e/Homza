@@ -27,7 +27,7 @@ add_user( user, macs ,url_img)
 
 #Creates a view in CouchDB which allows us to use retrieve_user_for_mac( mac 
 create_view_for_macs( )
-
+create_view_for_house()
 # Retrieve the user corresponding to a MAC address
 #mac = "98:D6:F7:6A:52:13"
 #retrieve_user_for_mac( mac )

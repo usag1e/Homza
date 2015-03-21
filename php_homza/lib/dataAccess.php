@@ -24,6 +24,15 @@ function get_url_img(){
 	return $view;
 }
 
+function get_printer_status(){
+	$db = initDb('house_status');
+
+	$opts = array("descending" => true, "limit" => 30);
+	$view = $db->setQueryParameters($opts)->getView('list' , "printer");
+
+	return $view;
+}
+
 function secondsToTime($seconds) {
     $dtF = new DateTime("@0");
     $dtT = new DateTime("@$seconds");
