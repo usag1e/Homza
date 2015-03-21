@@ -74,7 +74,7 @@ echo "<meta http-equiv='refresh' content='10;url=http://192.168.1.109/php_homza'
 					}else {
 						echo '<a href="detail_word.php?word='.$word.'">'.$word.'</a> : Out ! - '.secondsToTime($seen_since).' ago ( '.$newDate.' )';
 					}
-				echo '- RECORD : '.$last_seen_since.'<br/>';
+				echo ' - RECORD : '.$last_seen_since.' sec <br/>';
 				}
 				
 			?>
