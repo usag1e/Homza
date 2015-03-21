@@ -188,6 +188,32 @@ def url_img( user, url_img ):
 	db.save(doc)
 	db.compact()
 
+
+def update_printer_status(printer_status):
+	#First you need to connect to CouchDB server
+	couch = connect_to_db()
+	#Then load a databse in the object *db*
+	db = create_or_load_db( couch, 'house_status' )	
+	try:
+		#You can then use the object *db* to directly check a document through its _id, remember that we use urls as ids since a url is unique
+		doc = db[ '3dprinter' ]
+		doc['printer_status'] = printer_status.get('printer_status')
+		doc['bed_temperature'] = printer_status.get('bed_temperature')
+		doc['head_temperature'] = printer_status.get('head_temperature')
+		doc['job_name'] = printer_status.get('job_name')
+		doc['completion'] = printer_status.get('completion')
+		doc['elapsed_print_time'] = printer_status.get('elapsed_print_time')
+		doc['remaining_print_time'] = printer_status.get('remaining_print_time')
+		db.save(doc)
+		db.compact()
+	except ResourceNotFound:
+		dict_field_values = {
+			'_id'  : '3dprinter',
+			'printer_status' : printer_status.get('printer_status')
+		}
+		#The object *db* has a create method, and this is how you create a document
+		return db.create( dict_field_values )
+
 def update_internet_status(connection_status):
 	#First you need to connect to CouchDB server
 	couch = connect_to_db()
@@ -231,6 +257,7 @@ def update_last_arrived_home(user):
 	db.save(doc)
 	db.compact()
 	return True
+
 
 def inhabitant_just_arrived( user ):
 	couch = connect_to_db()
