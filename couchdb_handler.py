@@ -33,7 +33,8 @@ def add_user( user, macs , url_img ):
 			'_id'  : user,
 			'macs'  :macs,
 			'url_img' : url_img,
-			'last_played_music' : retrieve_time()
+			'last_played_music' : retrieve_time(),
+			'last_arrived_home:': retrieve_time()
 		}
 		#The object *db* has a create method, and this is how you create a document
 		return db.create( dict_field_values )
@@ -222,6 +223,15 @@ def update_last_played_music_time(user):
 	db.compact()
 	return last_played_music
 
+def update_last_arrived_home(user):
+	couch = connect_to_db()
+	db = create_or_load_db( couch, 'inhabitants' )	
+	doc = db[ user ]
+	doc['last_arrived_home'] = retrieve_time()
+	db.save(doc)
+	db.compact()
+	return True
+
 def inhabitant_just_arrived( user ):
 	couch = connect_to_db()
 	db = create_or_load_db( couch, 'inhabitants' )	
@@ -229,24 +239,14 @@ def inhabitant_just_arrived( user ):
 	presence = doc['presence']
 	seconds_since_last_seen = time.mktime(time.strptime(presence[len(presence)-1], "%Y%m%d%H%M%S"))-time.mktime(time.localtime())
 	if seconds_since_last_seen < 30:
-		here = 0
-		not_here = 0
-		for i in range(0, len(presence)-2):
-			seconds_since_last_seen_temp = time.mktime(time.strptime(presence[i], "%Y%m%d%H%M%S"))-time.mktime(time.localtime())
-			if seconds_since_last_seen_temp > 900:
-				not_here = not_here + 1
-			else:
-				here = here + 1
-		if not_here > here:
-			seconds_since_last_music = time.mktime(time.strptime(check_last_played_music_time(user), "%Y%m%d%H%M%S"))-time.mktime(time.localtime())
-			if seconds_since_last_music > 900:
-				update_last_played_music_time(user)
-				return True
-			else:
-				return False
-		return False
+		seconds_since_last_last_seen = time.mktime(time.strptime(presence[len(presence)-2], "%Y%m%d%H%M%S"))-time.mktime(time.localtime())
+		if seconds_since_last_last_seen > 1800 :
+			update_last_arrived_home( user )
+			print "[inhabitant_just_arrived] Welcome back", user, " !"
+			return True
+		else:
+			return False
 	else:
 		return False
-
 
 	
