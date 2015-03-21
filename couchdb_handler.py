@@ -75,6 +75,19 @@ def create_view_for_macs():
 			}''')
 	rpt_view.sync( db )
 
+def create_view_for_house():
+	#First you need to connect to CouchDB server
+	couch = connect_to_db()
+	#Then load a databse in the object *db*
+	db = create_or_load_db( couch, 'house_status' )	
+	rpt_view = ViewDefinition(
+			'list',
+			'printer',
+			'''function(doc) {
+			emit(doc._id, doc);
+			}''')
+	rpt_view.sync( db )
+
 
 def retrieve_user_for_mac( mac ):
 	#First you need to connect to CouchDB server
