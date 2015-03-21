@@ -3,6 +3,7 @@ from couchdb_handler import *
 import time
 import nmap
 from Internet import *
+from octopi_test import *
 
 #Initialisation
 user_mac=[]
@@ -60,6 +61,9 @@ while True:
 				print "User:", retrieve_user_for_mac(macs)
 	
 			###########################################
+			
+			printer_status = retrieve_printer_status()
+			update_printer_status( printer_status )
 		
 			a = a + 1
 			time.sleep(2)
