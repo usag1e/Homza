@@ -4,6 +4,7 @@ import time
 import nmap
 from Internet import *
 from octopi_test import *
+from weather_test import *
 
 #Initialisation
 user_mac=[]
@@ -64,6 +65,9 @@ while True:
 			
 			printer_status = retrieve_printer_status()
 			update_printer_status( printer_status )
+			###########################################
+			internet_temperature = getWeather()			
+			update_internet_weather(internet_temperature)
 		
 			a = a + 1
 			time.sleep(2)

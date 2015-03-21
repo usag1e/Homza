@@ -233,6 +233,25 @@ def update_internet_status(connection_status):
 		#The object *db* has a create method, and this is how you create a document
 		return db.create( dict_field_values )
 
+def update_internet_weather(internet_temperature):
+	#First you need to connect to CouchDB server
+	couch = connect_to_db()
+	#Then load a databse in the object *db*
+	db = create_or_load_db( couch, 'house_status' )	
+	try:
+		#You can then use the object *db* to directly check a document through its _id, remember that we use urls as ids since a url is unique
+		doc = db[ 'temperature' ]
+		doc['status'] = internet_temperature
+		db.save(doc)
+		db.compact()
+	except ResourceNotFound:
+		dict_field_values = {
+			'_id'  : 'temperature',
+			'status' : internet_temperature
+		}
+		#The object *db* has a create method, and this is how you create a document
+		return db.create( dict_field_values )
+
 def check_last_played_music_time(user):
 	couch = connect_to_db()
 	db = create_or_load_db( couch, 'inhabitants' )	
