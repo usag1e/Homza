@@ -5,6 +5,7 @@ import nmap
 from Internet import *
 from octopi_test import *
 from weather_test import *
+from play_mp3 import *
 
 #Initialisation
 user_mac=[]
@@ -17,13 +18,10 @@ update_internet_status(checkConnection())
 
 while True:
 	while (checkConnection() == True):
-		#Checking MAC Address Status
-		#We create a nm object that will be used to scan the network
-		nm = nmap.PortScanner()
-		#We give the scan parameter, and perform the scan
-		nm.scan(hosts = '192.168.1.0/24', arguments = '-n -sP -PE -T5')
 		a=0
 		while ( a < 3 ):
+			nm = nmap.PortScanner()
+			nm.scan(hosts = '192.168.1.0/24', arguments = '-n -sP -PE -T5')
 			up_macs=[]
 			print "=========================================================================="
 			print "Starting new loop"
@@ -61,7 +59,11 @@ while True:
 				up_known_macs_name=retrieve_user_for_mac(macs)
 				print "User:", retrieve_user_for_mac(macs)
 				inhabitant_just_arrived(retrieve_user_for_mac(macs) )
-	
+				if  inhabitant_just_arrived(retrieve_user_for_mac(macs) ) == True:	
+					print "Enjoy your song ! Now playing ..."
+					play_song(retrieve_user_for_mac(macs))
+
+				
 			###########################################
 			try:
 				printer_status = retrieve_printer_status()
@@ -69,10 +71,9 @@ while True:
 			except ValueError:
 				print "Printer not detected."
 			###########################################
-			internet_weather = getWeather()			
-			update_internet_weather(internet_weather)
+			#internet_weather = getWeather()			
+			#update_internet_weather(internet_weather)
 
-		
 			a = a + 1
 			time.sleep(2)
 	
