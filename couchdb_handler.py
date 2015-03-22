@@ -246,21 +246,30 @@ def update_internet_status(connection_status):
 		#The object *db* has a create method, and this is how you create a document
 		return db.create( dict_field_values )
 
-def update_internet_weather(internet_temperature):
+def update_internet_weather(internet_weather):
 	#First you need to connect to CouchDB server
 	couch = connect_to_db()
 	#Then load a databse in the object *db*
 	db = create_or_load_db( couch, 'house_status' )	
 	try:
 		#You can then use the object *db* to directly check a document through its _id, remember that we use urls as ids since a url is unique
-		doc = db[ 'temperature' ]
-		doc['status'] = internet_temperature
+		doc = db[ 'Weather' ]
+		doc['temperature'] = internet_weather.get('temperature')
+		doc['pressure'] = internet_weather.get('pressure')
+		doc['state'] = internet_weather.get('state')
+		doc['ID'] = internet_weather.get('ID')
+		doc['sunrise'] = internet_weather.get('sunrise')
+		doc['sunset'] = internet_weather.get('sunset')
+		#print "Type wind:", type(internet_weather.get('wind'))
+		doc['wind'] = internet_weather.get('wind')
+		
+		#doc['status'] = internet_weather
 		db.save(doc)
 		db.compact()
 	except ResourceNotFound:
 		dict_field_values = {
-			'_id'  : 'temperature',
-			'status' : internet_temperature
+			'_id'  : 'Weather',
+			
 		}
 		#The object *db* has a create method, and this is how you create a document
 		return db.create( dict_field_values )
