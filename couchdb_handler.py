@@ -296,9 +296,10 @@ def inhabitant_just_arrived( user ):
 	db = create_or_load_db( couch, 'inhabitants' )	
 	doc = db[ user ]
 	presence = doc['presence']
-	seconds_since_last_seen = time.mktime(time.strptime(presence[len(presence)-1], "%Y%m%d%H%M%S"))-time.mktime(time.localtime())
+	seconds_since_last_seen = time.mktime(time.localtime()) - time.mktime(time.strptime(presence[len(presence)-1], "%Y%m%d%H%M%S"))
 	if seconds_since_last_seen < 30:
-		seconds_since_last_last_seen = time.mktime(time.strptime(presence[len(presence)-2], "%Y%m%d%H%M%S"))-time.mktime(time.localtime())
+		print seconds_since_last_seen
+		seconds_since_last_last_seen = time.mktime(time.localtime())-time.mktime(time.strptime(presence[len(presence)-2], "%Y%m%d%H%M%S"))
 		if seconds_since_last_last_seen > 1800 :
 			update_last_arrived_home( user )
 			print "[inhabitant_just_arrived] Welcome back", user, " !"

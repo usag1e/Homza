@@ -60,14 +60,17 @@ while True:
 				update_last_seen_time(retrieve_user_for_mac(macs),timeString)
 				up_known_macs_name=retrieve_user_for_mac(macs)
 				print "User:", retrieve_user_for_mac(macs)
+				inhabitant_just_arrived(retrieve_user_for_mac(macs) )
 	
 			###########################################
-			
-			printer_status = retrieve_printer_status()
-			update_printer_status( printer_status )
+			try:
+				printer_status = retrieve_printer_status()
+				update_printer_status( printer_status )
+			except  ValueError:
+				print "No printer"
 			###########################################
-			internet_temperature = getWeather()			
-			update_internet_weather(internet_temperature)
+			#internet_temperature = getWeather()			
+			#update_internet_weather(internet_temperature)
 		
 			a = a + 1
 			time.sleep(2)
