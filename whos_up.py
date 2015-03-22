@@ -66,11 +66,12 @@ while True:
 			try:
 				printer_status = retrieve_printer_status()
 				update_printer_status( printer_status )
-			except  ValueError:
-				print "No printer"
+			except ValueError:
+				print "Printer not detected."
 			###########################################
-			#internet_temperature = getWeather()			
-			#update_internet_weather(internet_temperature)
+			internet_weather = getWeather()			
+			update_internet_weather(internet_weather)
+
 		
 			a = a + 1
 			time.sleep(2)
