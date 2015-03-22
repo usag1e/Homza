@@ -326,7 +326,7 @@ def inhabitant_just_arrived( user ):
 	if seconds_since_last_seen < 30:
 		#print seconds_since_last_seen
 		seconds_since_last_last_seen = time.mktime(time.localtime())-time.mktime(time.strptime(presence[len(presence)-2], "%Y%m%d%H%M%S"))
-		if seconds_since_last_last_seen > 1800 :
+		if seconds_since_last_last_seen > 300 :
 			update_last_arrived_home( user )
 			print "[inhabitant_just_arrived] Welcome back", user, " !"
 			return True

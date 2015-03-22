@@ -87,31 +87,13 @@ echo "<meta http-equiv='refresh' content='10;url=http://192.168.1.109/php_homza'
 	</div>
 	<div>
 	<h2> Printer Status </h2><br />
-			<?php
-				$couch_dsn = "http://localhost:5984";
-				$couch_db = "_utils/database.html?house_status/_design/list/_view/printer";
-
-				require_once "./lib/couch.php";
-				require_once "./lib/couchClient.php";
-				require_once "./lib/couchDocument.php";
-		
-				$client = new couchClient($couch_dsn,$couch_db);
-				try {
-					$info = $client->getDatabaseInfos();
-				} catch (Exception $e) {
-					echo "Error:".$e->getMessage()." (errcode=".$e->getCode().")\n";
-					exit(1);
-				}
-				echo 'info'.$info.;
-				
-			?>
 
 			<?php
 				echo ' - RECORD : '.$last_seen_since.' sec <br/>';
 				foreach ($view_house->rows as $row){
 					$status = $row->value;
 					$key = $row->key;
-					echo 'Status : ' .var$status. '<br/>';			
+					echo 'Status : ' .$key. '<br/>';			
 				}
 			?>
 			
