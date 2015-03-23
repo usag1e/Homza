@@ -26,14 +26,13 @@ echo "<meta http-equiv='refresh' content='10;url=http://192.168.1.109/php_homza'
                 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
                 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
                 <script src="http://cdn.oesmith.co.uk/morris-0.5.1.min.js"></script>
-
-	</head>
 	<?php
 		echo "SSID : Torrieux " ;
 		echo "&nbsp;&nbsp;&nbsp;&nbsp;";
-		echo " Pswd : 4J3E8A7NBRILLANT";
-	?><br />
-<br />		
+		echo " Pwd : 4J3E8A7NBRILLANT";
+	?>	
+	</head>
+	
 <body>
     <div id="page">
     <div>
@@ -89,11 +88,20 @@ echo "<meta http-equiv='refresh' content='10;url=http://192.168.1.109/php_homza'
 	<h2> Printer Status </h2><br />
 
 			<?php
+				$json = "http://127.0.0.1:5984/house_status/_design/list/_view/printer";
+				$jsonfile = file_get_contents($json);
+
+				$printer_json = var_dump(json_decode($jsonfile));
+				
+			
 				echo ' - RECORD : '.$last_seen_since.' sec <br/>';
 				foreach ($view_house->rows as $row){
+					echo $row;					
 					$status = $row->value;
 					$key = $row->key;
-					echo 'Status : ' .$key. '<br/>';			
+					#echo gettype($status);
+					echo $key;
+					#echo 'Status : ' .var_dump(json_decode($status)). '<br/>';			
 				}
 			?>
 			
