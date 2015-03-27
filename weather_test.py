@@ -1,7 +1,7 @@
 from pprint import pprint
 import requests
 import datetime
-
+import time
 
 # Function to get the weather in Montreal
 def getWeather():
@@ -32,6 +32,12 @@ def getWeather():
         int(SS)
     ).strftime('%Y-%m-%d %H:%M:%S')
 )
+	time_of_treatment = (
+    datetime.datetime.fromtimestamp(
+        int(time.mktime(time.localtime()))
+    ).strftime('%Y-%m-%d %H:%M:%S')
+)
+	print time_of_treatment
 
 	status['temperature'] = temperature
 	status['pressure'] = pressure
@@ -40,6 +46,7 @@ def getWeather():
 	status['sunrise'] = sunrise
 	status['sunset'] = sunset
 	status['wind'] = wind
+	status['time'] = time_of_treatment
 
 
 	print '[Weather] The temperature is:', temperature ,'C'

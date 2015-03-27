@@ -71,8 +71,13 @@ while True:
 			except ValueError:
 				print "Printer not detected."
 			###########################################
-			#internet_weather = getWeather()			
-			#update_internet_weather(internet_weather)
+			if retrieve_time_weather() == True:
+				try:
+					internet_weather = getWeather()			
+					update_internet_weather(internet_weather)
+				except ValueError:
+					print "weather could not be retrieved"
+					
 
 			a = a + 1
 			time.sleep(2)

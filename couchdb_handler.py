@@ -2,6 +2,8 @@ from couchdb import *
 import time
 from couchdb.design import ViewDefinition
 import urllib2
+import math
+import datetime
 
 # Creates a connection
 def connect_to_db():
@@ -279,7 +281,11 @@ def update_internet_weather(internet_weather):
 		doc['sunset'] = internet_weather.get('sunset')
 		#print "Type wind:", type(internet_weather.get('wind'))
 		doc['wind'] = internet_weather.get('wind')
+		doc['time'] =internet_weather.get('time')
 		
+		
+		
+		time.mktime(time.localtime())
 		#doc['status'] = internet_weather
 		db.save(doc)
 		db.compact()
@@ -290,7 +296,29 @@ def update_internet_weather(internet_weather):
 		}
 		#The object *db* has a create method, and this is how you create a document
 		return db.create( dict_field_values )
+		
+		
+def retrieve_time_weather():
+	couch = connect_to_db()
+	db = create_or_load_db( couch, 'house_status' )
+	for row in db.view( "_design/list/_view/printer" ):
+		if row.key == "Weather":
+			timeString = row.value['time']
+			#print row.value['time'], type(row.value['time'])
+			#formated_time = (datetime.datetime.fromtimestamp(int(timeString)).strftime('%Y-%m-%d %H:%M:%S'))
+			#print formated_time
+			#print row.value['time']
+	seconds_since_last_weather = time.mktime(time.localtime()) - time.mktime(time.strptime(str(row.value['time']), "%Y-%m-%d %H:%M:%S"))
+	if seconds_since_last_weather < 60:
+		return False
+		
+	else:
+		
+		return True
+	
 
+	
+		
 def check_last_played_music_time(user):
 	couch = connect_to_db()
 	db = create_or_load_db( couch, 'inhabitants' )	
@@ -336,3 +364,4 @@ def inhabitant_just_arrived( user ):
 		return False
 
 	
+retrieve_time_weather()
