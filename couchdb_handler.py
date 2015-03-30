@@ -301,23 +301,20 @@ def update_internet_weather(internet_weather):
 def retrieve_time_weather():
 	couch = connect_to_db()
 	db = create_or_load_db( couch, 'house_status' )
-	for row in db.view( "_design/list/_view/printer" ):
-		if row.key == "Weather":
-			timeString = row.value['time']
-			#print row.value['time'], type(row.value['time'])
-			#formated_time = (datetime.datetime.fromtimestamp(int(timeString)).strftime('%Y-%m-%d %H:%M:%S'))
-			#print formated_time
-			#print row.value['time']
-	seconds_since_last_weather = time.mktime(time.localtime()) - time.mktime(time.strptime(str(row.value['time']), "%Y-%m-%d %H:%M:%S"))
-	if seconds_since_last_weather < 60:
-		return False
-		
-	else:
-		
-		return True
+	try:
+		for row in db.view( "_design/list/_view/printer" ):
+			print row
+			if row.key == "Weather":
+				timeString = row.value['time']
+				seconds_since_last_weather = time.mktime(time.localtime()) - time.mktime(time.strptime(str(timeString), "%Y-%m-%d %H:%M:%S"))
 	
+				if seconds_since_last_weather < 60:
+					return False
+				else:
+					return True
+	except ResourceNotFound:
+		pass
 
-	
 		
 def check_last_played_music_time(user):
 	couch = connect_to_db()
@@ -362,6 +359,3 @@ def inhabitant_just_arrived( user ):
 			return False
 	else:
 		return False
-
-	
-retrieve_time_weather()
