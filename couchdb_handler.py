@@ -292,28 +292,35 @@ def update_internet_weather(internet_weather):
 	except ResourceNotFound:
 		dict_field_values = {
 			'_id'  : 'Weather',
-			
+			'time' :(
+    datetime.datetime.fromtimestamp(
+        int(time.mktime(time.localtime()))
+    ).strftime('%Y-%m-%d %H:%M:%S')
+)
 		}
 		#The object *db* has a create method, and this is how you create a document
 		return db.create( dict_field_values )
 		
 		
 def retrieve_time_weather():
+	print 'Hunch Hunch'
 	couch = connect_to_db()
 	db = create_or_load_db( couch, 'house_status' )
+	
 	try:
 		for row in db.view( "_design/list/_view/printer" ):
-			print row
 			if row.key == "Weather":
 				timeString = row.value['time']
 				seconds_since_last_weather = time.mktime(time.localtime()) - time.mktime(time.strptime(str(timeString), "%Y-%m-%d %H:%M:%S"))
-	
+				print seconds_since_last_weather
 				if seconds_since_last_weather < 60:
 					return False
 				else:
 					return True
+			else:
+				pass
 	except ResourceNotFound:
-		pass
+		return False
 
 		
 def check_last_played_music_time(user):

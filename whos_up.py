@@ -12,9 +12,11 @@ user_mac=[]
 unknown_mac=[]
 up_users=0
 main_up_users=[]
-
+internet_weather = getWeather()			
+update_internet_weather(internet_weather)
 main_unknown_users=[]
 update_internet_status(checkConnection())
+
 
 while True:
 	while (checkConnection() == True):
