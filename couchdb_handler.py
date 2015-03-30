@@ -303,7 +303,6 @@ def update_internet_weather(internet_weather):
 		
 		
 def retrieve_time_weather():
-	print 'Hunch Hunch'
 	couch = connect_to_db()
 	db = create_or_load_db( couch, 'house_status' )
 	
@@ -312,8 +311,7 @@ def retrieve_time_weather():
 			if row.key == "Weather":
 				timeString = row.value['time']
 				seconds_since_last_weather = time.mktime(time.localtime()) - time.mktime(time.strptime(str(timeString), "%Y-%m-%d %H:%M:%S"))
-				print seconds_since_last_weather
-				if seconds_since_last_weather < 60:
+				if seconds_since_last_weather < 300:
 					return False
 				else:
 					return True
