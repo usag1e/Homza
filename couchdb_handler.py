@@ -94,6 +94,7 @@ def create_view_for_macs():
 				emit(doc.music, doc._id);
 			}''')
 	rpt_view.sync( db )
+	
 def create_view_for_house():
 	#First you need to connect to CouchDB server
 	couch = connect_to_db()
@@ -106,7 +107,15 @@ def create_view_for_house():
 			emit(doc._id, doc);
 			}''')
 	rpt_view.sync( db )
+	rpt_view = ViewDefinition(
+			'list',
+			'weather',
+			'''function(doc) {
+			emit(doc.temperature, doc.pressure);
+			}''')
+	rpt_view.sync( db )
 
+	
 
 def retrieve_user_for_mac( mac ):
 	#First you need to connect to CouchDB server

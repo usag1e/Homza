@@ -7,6 +7,7 @@
 	$view1 = last_seen();
 	$view_img = get_url_img();
 	$view_house=get_printer_status();
+	//$view_temperature=get_temperature():
 
 	
 include('includes/header.php');
@@ -84,6 +85,17 @@ echo "<meta http-equiv='refresh' content='10;url=http://127.0.0.1/php_homza'>";
 			?>
 
 	</div>
+	
+	<?php
+
+		$url_dickbutt = "http://i1.kym-cdn.com/entries/icons/original/000/001/030/dickbutt.jpg";
+		echo '<div class="img_out" style="background-image:url('.$url_dickbutt.')"></div>';
+// 		$Temp = $view_temperature
+// 		echo $Temp
+			
+	?>
+			
+			
 	<div>
 	<h2> Printer Status </h2><br />
 
@@ -94,7 +106,7 @@ echo "<meta http-equiv='refresh' content='10;url=http://127.0.0.1/php_homza'>";
 				$printer_json = var_dump(json_decode($jsonfile));
 				
 			
-				echo ' - RECORD : '.$last_seen_since.' sec <br/>';
+				echo ' - RECORRRRRD : '.$last_seen_since.' sec';
 				foreach ($view_house->rows as $row){
 					echo $row;					
 					$status = $row->value;
@@ -106,6 +118,7 @@ echo "<meta http-equiv='refresh' content='10;url=http://127.0.0.1/php_homza'>";
 			?>
 			
     	
+    
 	</div>
 </div>
 </body>

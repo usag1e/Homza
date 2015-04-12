@@ -39,5 +39,13 @@ function secondsToTime($seconds) {
     return $dtF->diff($dtT)->format('%a jours, %h heures, %i minutes and %s secondes');
 }
 
+function get_temperature() {
+	$db = initDb('house_status');
+	
+	$opts = array("descending" => true, "limit" => 30);
+	$view = $db->setQueryParameters($opts)->getView('list' , "printer");
+	
+	return $view;
 
+}
 ?>
