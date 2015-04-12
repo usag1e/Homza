@@ -11,7 +11,7 @@
 
 	
 include('includes/header.php');
-echo "<meta http-equiv='refresh' content='10;url=http://127.0.0.1/php_homza'>";
+echo "<meta http-equiv='refresh' content='120;url=http://127.0.0.1/php_homza'>";
 	
 ?><!DOCTYPE html>
 <html>
@@ -85,36 +85,30 @@ echo "<meta http-equiv='refresh' content='10;url=http://127.0.0.1/php_homza'>";
 			?>
 
 	</div>
-	
-	<?php
-
-		$url_dickbutt = "http://i1.kym-cdn.com/entries/icons/original/000/001/030/dickbutt.jpg";
-		echo '<div class="img_out" style="background-image:url('.$url_dickbutt.')"></div>';
-// 		$Temp = $view_temperature
-// 		echo $Temp
-			
-	?>
-			
-			
 	<div>
-	<h2> Printer Status </h2><br />
+		<h2> Weather </h2><br />
+			<?php
+				$json = "http://127.0.0.1:5984/house_status/_design/list/_view/weather";
+				$jsonfile = file_get_contents($json);
+
+				$weather = json_decode($jsonfile);
+				echo 'Temperature is : ' , $weather->rows[2]->key, ' Celsius <br />';
+				echo 'Pressure is : ' , $weather->rows[2]->value,'<br />';
+			?>
+			
+	</div>		
+	<div>
+	<h2> Octoprint </h2><br />
 
 			<?php
 				$json = "http://127.0.0.1:5984/house_status/_design/list/_view/printer";
 				$jsonfile = file_get_contents($json);
-
-				$printer_json = var_dump(json_decode($jsonfile));
+		$printer_json = json_decode($jsonfile);
+				echo ' <b>Printer is currently </b> :  ', $printer_json->rows[0]->value->printer_status;
+				echo '<br /> <b>Head temperature</b> :  ', $printer_json->rows[0]->value->head_temperature;
+				echo '<br /> <b>Bed temperature</b> :  ', $printer_json->rows[0]->value->bed_temperature;
+				echo '<br /> <b>Job name </b> : ', $printer_json->rows[0]->value->job_name;
 				
-			
-				echo ' - RECORRRRRD : '.$last_seen_since.' sec';
-				foreach ($view_house->rows as $row){
-					echo $row;					
-					$status = $row->value;
-					$key = $row->key;
-					#echo gettype($status);
-					echo $key;
-					#echo 'Status : ' .var_dump(json_decode($status)). '<br/>';			
-				}
 			?>
 			
     	
