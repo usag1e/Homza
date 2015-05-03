@@ -14,9 +14,9 @@ def retrieve_printer_status():
 	r = requests.get('http://192.168.1.156/api/printer', auth=('API', '3D2318DE50E14E42AC2C804EC5DA4B81') )
 	content = r.content
 	data = json.loads(content)
-	bed_temperature = data['temps']['bed']['actual']
+	bed_temperature = data['temperature']['temps']['bed']['actual']
 	status['bed_temperature'] = bed_temperature
-	head_temperature = data['temps']['tool0']['actual']
+	head_temperature = data['temperature']['temps']['tool0']['actual']
 	status['head_temperature'] = head_temperature
 
 	payload = {'state': 'true'}
