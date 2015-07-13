@@ -67,11 +67,11 @@ while True:
 
 				
 			###########################################
-			try:
-				printer_status = retrieve_printer_status()
-				update_printer_status( printer_status )
-			except ValueError:
-				print "Printer not detected."
+			#try:
+			#	printer_status = retrieve_printer_status()
+			#	update_printer_status( printer_status )
+			#except ValueError:
+			#	print "Printer not detected."
 			###########################################
 
 					
