@@ -78,4 +78,9 @@ Example:
 screen -r  31844.pts-0.office
 ````
 
+#Dependencies
+```
+sudo pip install xmltodict
+```
+
 
