@@ -373,3 +373,47 @@ def inhabitant_just_arrived( user ):
 			return False
 	else:
 		return False
+
+def update_metro_service( metrostatus ):
+	couch = connect_to_db()
+	db = create_or_load_db( couch, 'house_status' )
+	try:
+		#You can then use the object *db* to directly check a document through its _id, remember that we use urls as ids since a url is unique
+		doc = db[ 'metro' ]
+		doc['metro1'] = metrostatus[0]
+		doc['metro2'] = metrostatus[1]
+		doc['metro4'] = metrostatus[2]
+		doc['metro5'] = metrostatus[3]
+		db.save(doc)
+		db.compact()
+	except ResourceNotFound:
+		dict_field_values = {
+			'_id'  : 'metro_service',
+			'metro1' : metrostatus[0],
+			'metro2' : metrostatus[1],
+			'metro4' : metrostatus[2],
+			'metro5' : metrostatus[3]
+		}
+		#The object *db* has a create method, and this is how you create a document
+		return db.create( dict_field_values )
+
+def update_ISS_passage( remaining, duration, date ):
+	couch = connect_to_db()
+	db = create_or_load_db( couch, 'house_status' )
+	try:
+		#You can then use the object *db* to directly check a document through its _id, remember that we use urls as ids since a url is unique
+		doc = db[ 'iss_passage' ]
+		doc['duration'] = duration
+		doc['remaining'] = remaining
+		doc['date'] = date
+		db.save(doc)
+		db.compact()
+	except ResourceNotFound:
+		dict_field_values = {
+			'_id'  : 'iss_passage',
+			'duration' : duration,
+			'remaining' : remaining,
+			'date' : date
+		}
+		#The object *db* has a create method, and this is how you create a document
+		return db.create( dict_field_values )

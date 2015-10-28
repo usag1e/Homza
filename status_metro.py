@@ -7,6 +7,7 @@ import xmltodict
 import json
 import io
 import subprocess
+from couchdb_handler import *
 
 def getETMData():
 	try:
@@ -20,6 +21,7 @@ def getETMData():
 
 		metrostatus = {}
 		metromsg = {}
+		ordered_status = []
 
 		#print
 		#print ETMdata
@@ -28,23 +30,19 @@ def getETMData():
 
 		for ligne in ETMdata['Root']['Ligne']:
 			#These commands show the information we need from the dictionary
-			print ligne['NoLigne'], ligne['msgAnglais'].encode('utf-8') 
-			print ""
 
 			if ligne['msgAnglais'].encode('utf-8') == "Normal métro service.": 
  				metrostatus[int(ligne['NoLigne'])] = False
+				ordered_status.append(False)
+				print "[status_metro] ", ligne['NoLigne'], ligne['msgAnglais'].encode('utf-8') 
 				metromsg[int(ligne['NoLigne'])] = ligne['msgAnglais'].encode('utf-8')
 			else:
-				print "Not in Normal Metro situation"
 				metrostatus[int(ligne['NoLigne'])] = True
+				ordered_status.append(True)
+				print "[status_metro] ", ligne['NoLigne'], ligne['msgAnglais'].encode('utf-8') 
 				metromsg[int(ligne['NoLigne'])] = ligne['msgAnglais'].encode('utf-8')
-
-
-		#if (len(set(metrostatus.items()) & set(self.metrostatus.items())) != 4):
-		#	if (len(set(self.metrostatusclear.items()) & set(metrostatus.items())) == 4):
-		#		subprocess.Popen(["aplay", "timbre3_speciaux_perturbations.wav"])
-		#	else:
-		#		subprocess.Popen(["aplay", "timbre1_clientele.wav"])
+		#print len(metrostatus), metrostatus
+		update_metro_service( ordered_status )
 
 	
 	except:

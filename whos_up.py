@@ -6,6 +6,8 @@ from Internet import *
 from octopi_test import *
 from weather_test import *
 from play_mp3 import *
+from status_metro import *
+from iss import *
 
 #Initialisation
 user_mac=[]
@@ -51,11 +53,11 @@ while True:
 			nb_users_up= len(up_known_macs)
 			nb_users_unknown=len(up_macs)-len(up_known_macs)
 
-			print nb_users_up, "known users in range"
-			print nb_users_unknown, "unknown users in range"
+			print nb_users_up, "known devices in range"
+			print nb_users_unknown, "unknown devices in range"
 
 
-			print "UPDATE DONE FOR: " 
+			print "HERE: " 
 			for macs in up_known_macs:
 				update_last_seen_time(retrieve_user_for_mac(macs),timeString)
 				up_known_macs_name=retrieve_user_for_mac(macs)
@@ -84,6 +86,13 @@ while True:
 				update_internet_weather(internet_weather)
 			except ValueError:
 				print "weather could not be retrieved"
+	
+		#Updating Metro data
+		getETMData()
+
+		#Updating ISS data
+		getISS()
+
 		time.sleep(10)
 		display_status()
 	
