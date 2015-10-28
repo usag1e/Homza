@@ -25,7 +25,7 @@ add_user( user, macs ,url_img,music)
 
 user = "Gael"
 macs = ["40:78:6A:C2:1C:06","80:56:F2:08:AE:45"]
-url_img = 'https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xpf1/v/t1.0-9/p206x206/10464400_10152450938589754_9088480680765082395_n.jpg?oh=1ed8fd4b01afeebf28866ce098fb02c6&oe=55827C27&__gda__=1435651377_3946885bf0ad47479018f6c1b361c95e'
+url_img = 'https://cbsmontrealchapter.files.wordpress.com/2015/02/gael.jpg'
 music = "gael.mp3"
 add_user( user, macs ,url_img,music)
 
