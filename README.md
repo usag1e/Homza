@@ -83,4 +83,12 @@ screen -r  31844.pts-0.office
 sudo pip install xmltodict
 ```
 
+#Control volume on Raspi
+
+This line for instance sets the volume to 54% :
+
+```
+ sudo amixer sset PCM,0 54%
+```
+
 
