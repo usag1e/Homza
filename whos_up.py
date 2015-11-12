@@ -38,6 +38,7 @@ while True:
 				if nm[host]['status']['state'] != "down":	
 					try:
 						if str(nm[host]['addresses']['mac']) not in up_macs:
+							print str(nm[host]['addresses']['mac'])
 							up_macs.append( str(nm[host]['addresses']['mac']))
 					
 					except:
@@ -46,7 +47,7 @@ while True:
 
 			#print "UP MACS: ", up_macs
 			known_macs=retrieve_known_macs()
-			#print "KNOWN MACS: ",retrieve_known_macs()
+			print "KNOWN MACS: ",retrieve_known_macs()
 
 			######### AVAILABLE USERS ################
 			up_known_macs=compare_list(up_macs,known_macs)
