@@ -11,7 +11,7 @@
 
 	
 include('includes/header.php');
-echo "<meta http-equiv='refresh' content='120;url=.'>";
+echo "<meta http-equiv='refresh' content='30;url=.'>";
 	
 ?><!DOCTYPE html>
 <html>
@@ -33,11 +33,11 @@ echo "<meta http-equiv='refresh' content='120;url=.'>";
     <div id="page">
     <div>
       <p>
-      <?php
-        echo "SSID : Torrieux " ;
-        echo "&nbsp;&nbsp;&nbsp;&nbsp;";
-        echo " Pwd : 4J3E8A7NBRILLANT";
-      ?>
+	<?php
+		echo "SSID : DORMATORY" ;
+		echo "&nbsp;&nbsp;&nbsp;&nbsp;";
+		echo " Pwd : 43JEAN87BRILLANT";
+	?>	
       </p>  
       <h2> Who's UP ? </h2><br />
 			<?php
