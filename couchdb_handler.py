@@ -285,6 +285,7 @@ def update_internet_weather(internet_weather):
 		doc['temperature'] = internet_weather.get('temperature')
 		doc['pressure'] = internet_weather.get('pressure')
 		doc['state'] = internet_weather.get('state')
+		doc['icon'] = internet_weather.get('icon')
 		doc['ID'] = internet_weather.get('ID')
 		doc['sunrise'] = internet_weather.get('sunrise')
 		doc['sunset'] = internet_weather.get('sunset')

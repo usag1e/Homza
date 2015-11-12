@@ -4,7 +4,7 @@ import time
 import nmap
 from Internet import *
 from octopi_test import *
-from weather_test import *
+from weather import *
 from play_mp3 import *
 from status_metro import *
 from iss import *

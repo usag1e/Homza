@@ -11,7 +11,7 @@
 
 	
 include('includes/header.php');
-echo "<meta http-equiv='refresh' content='120;url=http://127.0.0.1/php_homza'>";
+echo "<meta http-equiv='refresh' content='120;url=.'>";
 	
 ?><!DOCTYPE html>
 <html>
@@ -27,17 +27,19 @@ echo "<meta http-equiv='refresh' content='120;url=http://127.0.0.1/php_homza'>";
                 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
                 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
                 <script src="http://cdn.oesmith.co.uk/morris-0.5.1.min.js"></script>
-	<?php
-		echo "SSID : Torrieux " ;
-		echo "&nbsp;&nbsp;&nbsp;&nbsp;";
-		echo " Pwd : 4J3E8A7NBRILLANT";
-	?>	
 	</head>
 	
 <body>
     <div id="page">
     <div>
-	<h2> Who's UP ? </h2><br />
+      <p>
+      <?php
+        echo "SSID : Torrieux " ;
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;";
+        echo " Pwd : 4J3E8A7NBRILLANT";
+      ?>
+      </p>  
+      <h2> Who's UP ? </h2><br />
 			<?php
 				
 				foreach ( $view_img->rows as $row){
@@ -92,7 +94,8 @@ echo "<meta http-equiv='refresh' content='120;url=http://127.0.0.1/php_homza'>";
 				$jsonfile = file_get_contents($json);
 
 				$weather = json_decode($jsonfile);
-				echo '<h2>', $weather->state, '</h2>';
+        echo '<img src="http://openweathermap.org/img/w/', $weather->icon, '.png">';
+				echo '<h3>', $weather->state, '</h3>';
 				echo 'Temperature is : ' , $weather->temperature, ' Celsius <br />';
 				echo 'Pressure is : ' , $weather->pressure,'<br />';
 			?>
