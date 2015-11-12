@@ -88,12 +88,13 @@ echo "<meta http-equiv='refresh' content='120;url=http://127.0.0.1/php_homza'>";
 	<div>
 		<h2> Weather </h2><br />
 			<?php
-				$json = "http://127.0.0.1:5984/house_status/_design/list/_view/weather";
+				$json = "http://127.0.0.1:5984/house_status/Weather";
 				$jsonfile = file_get_contents($json);
 
 				$weather = json_decode($jsonfile);
-				echo 'Temperature is : ' , $weather->rows[2]->key, ' Celsius <br />';
-				echo 'Pressure is : ' , $weather->rows[2]->value,'<br />';
+				echo '<h2>', $weather->state, '</h2>';
+				echo 'Temperature is : ' , $weather->temperature, ' Celsius <br />';
+				echo 'Pressure is : ' , $weather->pressure,'<br />';
 			?>
 			
 	</div>		

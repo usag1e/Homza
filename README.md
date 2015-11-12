@@ -6,6 +6,7 @@ You will need to first do:
 ````
 sudo apt-get install nmap
 sudo pip install python-nmap
+sudo pip install xmltodict
 ````
 
 You can then:
