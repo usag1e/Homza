@@ -23,7 +23,7 @@ def getISS() :
 	duration = lj['response'][0]['duration']
 	remaining = lj['response'][0][ 'risetime' ] - calendar.timegm(time.gmtime())
 	# Here we convert the UNIX answer to normal date and time
-	print '[iss] In ', remaining , "seconds; at", datetime.datetime.fromtimestamp(date).strftime("%R:%S, %B %d, %Y"), "for", duration, 'seconds'
+	print '[iss] In ', remaining/60 , "minutes; at", datetime.datetime.fromtimestamp(date).strftime("%R:%S, %B %d, %Y"), "for", duration, 'seconds'
 	update_ISS_passage( remaining, duration, datetime.datetime.fromtimestamp(date).strftime("%R:%S, %B %d, %Y") )
 
 getISS()
