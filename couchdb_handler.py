@@ -26,10 +26,10 @@ def add_user( user, macs , url_img , music):
 	db = create_or_load_db( couch, 'inhabitants' )	
 	# Let's check if the user exists already by trying to get it, and if it is not here, it means we can add it 
 	try:
-		#You can then use the object *db* to directly check a document through its _id, remember that we use urls as ids since a url is unique
+		#You can then use the object *db* to directly check a document through its _id, remember that we use user names as ids since a user name is unique
 		doc = db[ user ]
 		#The object *doc* contains the document from the users databse which _id is url_rss
-		print "[couch-add_user] %s is already a user in the database" % user
+		#print "[couch-add_user] %s is already a user in the database" % user
 	except ResourceNotFound:
 		dict_field_values = {
 			'_id'  : user,
@@ -48,7 +48,7 @@ def retrieve_music(user):
 	db = create_or_load_db( couch, 'inhabitants' )	
 	for row in db.view( "_design/list/_view/music_name" ):
 		if user==row.value:
-			music=row.key
+			music = row.key
 	return music
 	
 
