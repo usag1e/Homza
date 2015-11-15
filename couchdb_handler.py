@@ -69,8 +69,8 @@ def create_view_for_macs():
 	rpt_view = ViewDefinition(
 			'list',
 			'last_seen',
-			'''function(doc) {
-				emit(doc.presence[doc.presence.length - 1], doc._id);
+                        '''function(doc) {
+				emit(doc.presence[doc.presence.length - 1], [doc._id, doc.url_img]);
 			}''')
 	rpt_view.sync( db )
 	rpt_view = ViewDefinition(
