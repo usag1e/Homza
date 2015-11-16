@@ -6,7 +6,7 @@ import time
 #We create a nm object that will be used to scan the network
 nm = nmap.PortScanner()
 #We give the scan parameter, and perform the scan
-nm.scan(hosts = '192.168.1.0/24', arguments = '-n -sP -PE -T5')
+nm.scan(hosts = '192.168.0.0/24', arguments = '-n -sP -PE -T5')
 
 #Recording local time of the scan in the object localtime using a function from the time package
 localtime = time.asctime(time.localtime(time.time()))

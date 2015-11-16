@@ -1,3 +1,4 @@
+#! /usr/bin/env python
 #You absolutely need these 2 imports at the beginning of your script to be able to use these functions, also you must be in the same folder
 from couchdb_handler import *
 import time
@@ -25,7 +26,7 @@ while True:
 		a=0
 		while ( a < 3 ):
 			nm = nmap.PortScanner()
-			nm.scan(hosts = '192.168.1.0/24', arguments = '-n -sP -PE -T5')
+			nm.scan(hosts = '192.168.0.0/24', arguments = '-n -sP -PE -T5')
 			up_macs=[]
 			print "=========================================================================="
 			print "Starting new loop"
