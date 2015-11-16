@@ -21,28 +21,26 @@ html, body {
     width: 100%;
 }
 
-.img_in {
-    display: inline-block;
-    width:  200px;
-    height: 200px;
-    margin-left: 1%;
-    background-position: 50% 50%;
-    background-repeat:   no-repeat;
-    background-size:     cover;
-    border-style: solid;
-    border-color: #339900;
+#who > * {
+    vertical-align: top;
 }
 
-.img_just, .img_out {
+.img_container {
     display: inline-block;
-    width:  200px;
-    height: 200px;
+    width:  150px;
+}
+
+.img_in, .img_just, .img_out {
+    height: 150px;
     margin-left: 1%;
     background-position: 50% 50%;
     background-repeat:   no-repeat;
     background-size:     cover;
     border-style: solid;
-    filter: alpha(opacity=40);
+}
+
+.img_in {
+    border-color: #339900;
 }
 
 .img_just {
@@ -55,6 +53,10 @@ html, body {
     border-color: #CC0000 ;
 }
 
+.small {
+    font-size: 0.7em;
+    padding: 0 0.5em;
+}
 
 .clear{
 	clear:both;
@@ -66,7 +68,7 @@ H2{
 
 header{
 	width:100%;
-	height:300px;
+	height:150px;
 	background:url(../img/launch.jpg) 0 -70px;
 	background-size: cover;
 	position:relative;
@@ -105,6 +107,7 @@ a, a:hover{
 .title{
 	float:left;
 	width:200px;
+  margin-left: 10px;
 }
     
 .title h1{
@@ -120,7 +123,6 @@ a, a:hover{
 #desc {
 	height:auto;
 	width:100%;
-	margin-top:50px;
 	text-align:center;
 }
 
