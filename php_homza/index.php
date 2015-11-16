@@ -8,7 +8,7 @@
 	$view_house = get_printer_status();
 	
 include('includes/header.php');
-// echo "<meta http-equiv='refresh' content='30;url=.'>";
+echo "<meta http-equiv='refresh' content='30;url=.'>";
 	
 ?><!DOCTYPE html>
 <html>
