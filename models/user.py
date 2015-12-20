@@ -1,7 +1,7 @@
 import pydash as _
 import yaml, os
 from . import Entity
-import MusicPlayer
+from Homza import MusicPlayer
 
 class User(Entity):
     _collection = 'home_users'
@@ -36,7 +36,7 @@ class User(Entity):
         return filtered_users
 
     @classmethod
-    def import_from_file(klass):
+    def init(klass):
         script_dir = os.path.dirname(__file__)
         try:
             with open(

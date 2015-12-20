@@ -8,25 +8,24 @@ import yaml, os
 from . import Entity
 
 class House:
+    _collection = 'homza'
+
     def __init__(self, data):
         if not data:
             raise Entity.ArgumentMissingException('House.data')
-        self._id = data.name
+        self._id = data['name']
         already_saved = super(House, self).get()
         if already_saved:
             self = already_saved
         else:
-            self.longitude = data.longitude
-            self.latitude = data.latitude
+            self.longitude = data['longitude']
+            self.latitude = data['latitude']
             self.create()
     
     @classmethod
-    def import_house(klass):
+    def init(klass):
         script_dir = os.path.dirname(__file__)
-        try:
-            with open(os.path.join(script_dir, "../data/house.yml"), 'r') as ymlfile:
-                houseData = yaml.load(ymlfile)
-                house = klass(houseData)
-                return house
-        except Exception as e:
-            raise e
+        with open(os.path.join(script_dir, "../data/house.yml"), 'r') as ymlfile:
+            houseData = yaml.load(ymlfile)
+            house = House(houseData)
+            return house
