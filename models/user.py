@@ -1,6 +1,7 @@
 # import pydash as _
+import yaml, os
 from . import Entity
-from Homza import MusicPlayer
+import MusicPlayer
 
 class User(Entity):
     _collection = 'home_users'
@@ -33,4 +34,26 @@ class User(Entity):
             )
         )
         return filtered_users
+
+    @classmethod
+    def import_from_file():
+        script_dir = os.path.dirname(__file__)
+        try:
+            with open(
+                os.path.join(script_dir, "../data/users.yml"), 'r'
+            ) as ymlfile:
+                users = yaml.load(ymlfile)
+                users_list = []
+                for user in users:
+                    users_list.append(
+                        User(
+                            user.name,
+                            user.mac_addresses,
+                            user.image,
+                            user.song
+                        )
+                    )
+                return users_list
+        except Exception as e:
+            raise e
 
