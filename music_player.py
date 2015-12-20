@@ -4,13 +4,13 @@ Created on Sun Dec 20 15:45:37 2015
 
 @author: ilyass
 """
-import logging
-from process import Process_runner
+import logging, sys, subprocess, shlex
+from process_runner import ProcessRunner
 
 logger = logging.getLogger(__name__)
 
 
-class Music_Player:
+class MusicPlayer:
     def __init__(self, file_to_play):
         self.file_to_play = file_to_play
         self.play_song()
@@ -37,5 +37,5 @@ class Music_Player:
         cmd_string = "{0} \"{1}\"".format(audio_player, self.file_to_play)
         logger.info(cmd_string)
         cmd = shlex.split(cmd_string)
-        proc = Process_runner(cmd_string, 20)
+        proc = ProcessRunner(cmd_string, 20)
         

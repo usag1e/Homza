@@ -1,7 +1,6 @@
 import nmap
 
-class network_sweeper:
-
+class NetworkSweeper:
     def __init__(self):
         self.sweep()
     
