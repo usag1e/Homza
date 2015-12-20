@@ -35,7 +35,10 @@ class Entity(object):
         connector.remove_entity(self)
 
     def toCouch(self):
-        raise NotImplementedError( "This method needs to be implemented for this entity to be saved in CouchDB" )
+        try:
+            return self.__dict__
+        except:
+            raise NotImplementedError( "This method needs to be implemented for this entity to be saved in CouchDB" )
 
     def fromCouch(self, couch_self):
         for (key, value) in couch_self.iteritems():

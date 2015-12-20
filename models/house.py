@@ -7,19 +7,21 @@ Created on Sun Dec 20 17:26:41 2015
 import yaml, os
 from . import Entity
 
-class House:
+class House(Entity):
     _collection = 'homza'
 
-    def __init__(self, data):
-        if not data:
-            raise Entity.ArgumentMissingException('House.data')
-        self._id = data['name']
+    def __init__(self, name=None, latitude=None, longitude=None):
+        self._id = 'house'
         already_saved = super(House, self).get()
         if already_saved:
             self = already_saved
         else:
-            self.longitude = data['longitude']
-            self.latitude = data['latitude']
+            if name:
+                self.name = name
+            if longitude:
+                self.longitude = longitude
+            if latitude:
+                self.latitude = latitude
             self.create()
     
     @classmethod
@@ -27,5 +29,9 @@ class House:
         script_dir = os.path.dirname(__file__)
         with open(os.path.join(script_dir, "../data/house.yml"), 'r') as ymlfile:
             houseData = yaml.load(ymlfile)
-            house = House(houseData)
+            house = House(
+                houseData['name'],
+                houseData['latitude'],
+                houseData['longitude']
+            )
             return house
