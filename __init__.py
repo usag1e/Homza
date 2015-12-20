@@ -12,4 +12,5 @@ logger.addHandler(handler)
 from .internet import Internet
 from .music_player import MusicPlayer
 from .process_runner import ProcessRunner
+from .models import *
 

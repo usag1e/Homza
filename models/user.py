@@ -1,4 +1,4 @@
-# import pydash as _
+import pydash as _
 import yaml, os
 from . import Entity
 import MusicPlayer
@@ -25,8 +25,8 @@ class User(Entity):
         MusicPlayer(self.song).play_song()
 
     @classmethod
-    def get_all_with_mac_addresses(self, mac_addresses):
-        all_users = super(User, self).get_all()
+    def get_all_with_mac_addresses(klass, mac_addresses):
+        all_users = super(klass, self).get_all()
         filtered_users = _.collections.filter_(
             users,
             lambda user: any(
@@ -36,7 +36,7 @@ class User(Entity):
         return filtered_users
 
     @classmethod
-    def import_from_file():
+    def import_from_file(klass):
         script_dir = os.path.dirname(__file__)
         try:
             with open(
