@@ -9,6 +9,7 @@ from . import Entity
 
 class House(Entity):
     _collection = 'homza'
+    _type = 'home'
 
     def __init__(self, name=None, latitude=None, longitude=None):
         self._id = 'house'
