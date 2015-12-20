@@ -10,7 +10,7 @@ import subprocess
 import sys, time
 from threading import Timer
 
-class Process_runner:
+class Process_Runner:
     def __init__(self, cmd, timeout):
         self.run(cmd, timeout)
     
