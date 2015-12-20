@@ -10,9 +10,9 @@ from process import Process_runner
 logger = logging.getLogger(__name__)
 
 
-class music_player:
-    def __init__(self, user):
-        self.user = user
+class Music_Player:
+    def __init__(self, file_to_play):
+        self.file_to_play = file_to_play
         self.play_song()
 
     def program_exists(self, name):
@@ -31,11 +31,10 @@ class music_player:
         sys.exit('No audio player found. We recommend installing mplayer')
         
     def play_song(self):
-        file_to_play = self.retrieve_music(self.user)
-        if not file_to_play:
+        if not self.file_to_play:
             return False
         audio_player = self.audio_player_name()
-        cmd_string = "{0} \"{1}\"".format(audio_player, file_to_play)
+        cmd_string = "{0} \"{1}\"".format(audio_player, self.file_to_play)
         logger.info(cmd_string)
         cmd = shlex.split(cmd_string)
         proc = Process_runner(cmd_string, 20)
