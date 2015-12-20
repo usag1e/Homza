@@ -21,7 +21,7 @@ class User(Entity):
             self.create()
     
     def play_song():
-        MusicPlayer.play_song(self.song)
+        MusicPlayer(self.song).play_song()
 
     @classmethod
     def get_all_with_mac_addresses(self, mac_addresses):

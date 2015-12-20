@@ -5,12 +5,12 @@ Created on Sun Dec 20 15:45:37 2015
 @author: ilyass
 """
 import logging
-from process import Process_runner
+from process_runner import ProcessRunner
 
 logger = logging.getLogger(__name__)
 
 
-class Music_Player:
+class MusicPlayer:
     def __init__(self, file_to_play):
         self.file_to_play = file_to_play
         self.play_song()
