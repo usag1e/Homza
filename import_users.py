@@ -12,7 +12,7 @@ def get_users():
 
 users = get_users()
 for user in users:
-    User(user.name, user.macs, user.image, user.song)
+    User(user.name, user.mac_addresses, user.image, user.song)
 
 #Creates a view in CouchDB which allows us to use retrieve_user_for_mac( mac 
 # create_view_for_macs( )
