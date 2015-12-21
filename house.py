@@ -28,7 +28,7 @@ class House(Entity):
     @classmethod
     def init(klass):
         script_dir = os.path.dirname(__file__)
-        with open(os.path.join(script_dir, "../data/house.yml"), 'r') as ymlfile:
+        with open(os.path.join(script_dir, "data/house.yml"), 'r') as ymlfile:
             houseData = yaml.load(ymlfile)
             house = House(
                 houseData['name'],
