@@ -41,7 +41,7 @@ class User(Entity):
         script_dir = os.path.dirname(__file__)
         try:
             with open(
-                os.path.join(script_dir, "data/users.yml"), 'r'
+                os.path.join(script_dir, "../data/users.yml"), 'r'
             ) as ymlfile:
                 users = yaml.load(ymlfile)
                 users_list = []
