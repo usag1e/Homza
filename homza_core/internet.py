@@ -1,13 +1,18 @@
 import urllib2 
 import logging
+import requests
 
 logger = logging.getLogger(__name__)
 
 class Internet:
-
     def __init__(self):
         self.checkConnection()
     
+    def get(url):
+        try:
+            return requests.get(url)
+        except:
+            return False
     
     def checkConnection(self):
         try:

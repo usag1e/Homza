@@ -4,12 +4,10 @@ Created on Sun Dec 20 16:36:07 2015
 
 @author: ilyass
 """
-import requests
 from house import House
+from internet import Internet
 
-
-class iss_finder:
-    
+class IssFinder:
     def __init__(self):
         self.next_passage()
         
@@ -20,8 +18,9 @@ class iss_finder:
             return False
         # Requesting ISS from Open-notify.org for Montreal, in .json
         request_url = 'http://api.open-notify.org/iss-pass.json?lat=%s&lon=%s' % ( house.longitude, house.latitude )        
-        l = requests.get( request_url )
-        lj = l.json()
-        self.date = lj['response'][0]['risetime']
-        self.duration = lj['response'][0]['duration']
-        self.remaining = lj['response'][0][ 'risetime' ] - calendar.timegm(time.gmtime())
+        response = Internet.get(request_url)
+        object_response = response.json()
+        if object_response:
+            self.date = object_response['response'][0]['risetime']
+            self.duration = object_response['response'][0]['duration']
+            self.remaining = object_response['response'][0][ 'risetime' ] - calendar.timegm(time.gmtime())
