@@ -17,7 +17,6 @@ class NetworkSweeper:
                 try:
                     if str(nm[host]['addresses']['mac']) not in up_macs:
                         up_macs.append( str(nm[host]['addresses']['mac']))
-                except ValueError as e:
-                    raise e
+                except:
                     mac = 'unknown'
         self.macs = up_macs

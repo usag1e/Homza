@@ -4,7 +4,7 @@ from . import Entity
 from music_player import MusicPlayer
 
 class User(Entity):
-    _collection = 'home_users'
+    _collection = 'homza'
     _type = 'user'
 
     def __init__(self, name, mac_addresses=[], image=None, song=None):
