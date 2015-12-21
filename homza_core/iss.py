@@ -6,6 +6,9 @@ Created on Sun Dec 20 16:36:07 2015
 """
 from house import House
 from internet import Internet
+import logging
+
+logger = logging.getLogger(__name__)
 
 class IssFinder:
     def __init__(self):
@@ -13,12 +16,16 @@ class IssFinder:
         
     def next_passage(self):
         house = House()
-        if not house.latitude or house.longitude:
+        print house.latitude, house.longitude
+        if not house.latitude and not house.longitude:
+            print "IN IF"
             logger.error("Could not find latitude or longitude.")
             return False
         # Requesting ISS from Open-notify.org for Montreal, in .json
+        print "Requesting"
         request_url = 'http://api.open-notify.org/iss-pass.json?lat=%s&lon=%s' % ( house.longitude, house.latitude )        
         response = Internet.get(request_url)
+        print response
         object_response = response.json()
         if object_response:
             self.date = object_response['response'][0]['risetime']

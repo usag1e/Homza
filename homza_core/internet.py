@@ -8,7 +8,8 @@ class Internet:
     def __init__(self):
         self.checkConnection()
     
-    def get(url):
+    @classmethod
+    def get(klass, url):
         try:
             return requests.get(url)
         except:

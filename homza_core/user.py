@@ -48,10 +48,10 @@ class User(Entity):
                 for user in users:
                     users_list.append(
                         User(
-                            user.name,
-                            user.mac_addresses,
-                            user.image,
-                            user.song
+                            user["name"],
+                            user["mac_addresses"],
+                            user["image"],
+                            user["song"]
                         )
                     )
                 return users_list

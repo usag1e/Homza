@@ -1,7 +1,7 @@
 import logging
 
 logging.basicConfig(level=logging.INFO)
-handler = logging.FileHandler('nalyzer_core.log')
+handler = logging.FileHandler('homza.log')
 handler.setLevel(logging.WARNING)
 # create a logging format
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -15,6 +15,8 @@ from .process_runner import ProcessRunner
 from entity import Entity
 from house import House
 from user import User
+from .iss import IssFinder
+from .network_sweeper import NetworkSweeper
 
 House.init()
 User.init()
