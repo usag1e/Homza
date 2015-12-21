@@ -2,6 +2,7 @@ import pydash as _
 import yaml, os
 from . import Entity
 from music_player import MusicPlayer
+from time import Time
 
 class User(Entity):
     _collection = 'home_users'
@@ -13,7 +14,8 @@ class User(Entity):
         self._id = name
         already_saved = super(User, self).get()
         if already_saved is not None:
-            self = already_saved
+            #self = already_saved
+            self.update_my_time()
         else:
             self.mac_addresses = mac_addresses
             if image:
@@ -22,16 +24,23 @@ class User(Entity):
                 self.song = song
             self.create()
     
-    def play_song():
+    def play_song(self):
         MusicPlayer(self.song).play_song()
+        
+    def update_my_time(self):
+        print self._id
+        time = Time()
+        print time.retrieve_time()
+        self.time = Time()
+        Entity.update(User)
 
     @classmethod
     def get_all_with_mac_addresses(klass, mac_addresses):
-        all_users = super(klass, self).get_all()
+        all_users = super(User, klass).get_all()
         filtered_users = _.collections.filter_(
-            users,
+            all_users,
             lambda user: any(
-                one_mac for one_mac in self.mac_addresses if one_mac in mac_addresses
+                one_mac for one_mac in user.mac_addresses if one_mac in mac_addresses
             )
         )
         return filtered_users
