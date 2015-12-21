@@ -11,8 +11,7 @@ import math
 class Time:
     def __init__(self):
         self.retrieve_time()        
-        
-        
+
     def retrieve_time(self):
         localtime=time.localtime()
         timeString =time.strftime("%Y%m%d%H%M%S", localtime)

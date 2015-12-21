@@ -5,7 +5,7 @@ from music_player import MusicPlayer
 from time import Time
 
 class User(Entity):
-    _collection = 'home_users'
+    _collection = 'homza'
     _type = 'user'
 
     def __init__(self, name, mac_addresses=[], image=None, song=None):
