@@ -1,6 +1,6 @@
 import pydash as _
 import yaml, os
-from . import Entity
+from entity import Entity
 from music_player import MusicPlayer
 from alttime import AltTime
 
@@ -29,8 +29,10 @@ class User(Entity):
         
     def update_my_time(self):
         extime = AltTime.retrieve_time()
-        self.time = extime
-        self.update()
+        detected_time = extime
+        if type(self.time) is not list:
+            self.time = []
+        self.time.append(detected_time)
 
     @classmethod
     def get_all_with_mac_addresses(klass, mac_addresses):
