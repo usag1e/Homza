@@ -4,9 +4,8 @@ Created on Sun Dec 20 16:22:31 2015
 
 @author: ilyass
 """
-import time as pytime
-import datetime
-import math
+import time
+# print repr(time) # To debug an import !
 
 class AltTime:
     def __init__(self):
@@ -14,6 +13,5 @@ class AltTime:
 
     @classmethod
     def retrieve_time(klass):
-        localtime = pytime.localtime()
-        timeString = pytime.strftime("%Y%m%d%H%M%S", localtime)
-        return timeString
+        the_time = time.localtime()
+        return time.strftime("%Y%m%d%H%M%S", the_time)

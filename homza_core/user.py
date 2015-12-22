@@ -16,7 +16,6 @@ class User(Entity):
         already_saved = self.get()
         if already_saved is not None:
             self = already_saved
-            self.update_my_time()
         else:
             self.mac_addresses = mac_addresses
             if image:
@@ -35,15 +34,15 @@ class User(Entity):
 
     @classmethod
     def get_all_with_mac_addresses(klass, mac_addresses):
-        all_users = super(User, klass).get_all()
-        for user in all_users:
-            print user._id + '*'
+        all_users = klass.get_all()
         filtered_users = _.collections.filter_(
             all_users,
             lambda user: any(
                 one_mac for one_mac in user.mac_addresses if one_mac in mac_addresses
             )
         )
+        for user in filtered_users:
+            user.update_my_time()
         return filtered_users
 
     @classmethod

@@ -37,7 +37,7 @@ def get_all_of(entity):
     for result in view_results:
         if not '_design' in result['id']:
             doc = db[result['id']]
-            if doc['type'] is entity._type:
+            if doc['type'] == entity._type:
                 results.append(entity(result['id']))
     return results
 

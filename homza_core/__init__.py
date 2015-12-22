@@ -12,9 +12,10 @@ logger.addHandler(handler)
 from .internet import Internet
 from .music_player import MusicPlayer
 from .process_runner import ProcessRunner
-from entity import Entity
-from house import House
-from user import User
+from .entity import Entity
+from .house import House
+from .alttime import AltTime
+from .user import User
 from .iss import IssFinder
 from .network_sweeper import NetworkSweeper
 
