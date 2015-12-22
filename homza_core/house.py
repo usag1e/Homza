@@ -12,6 +12,7 @@ class House(Entity):
     _type = 'home'
 
     def __init__(self, name=None, latitude=None, longitude=None):
+        self.type = House._type
         self._id = 'house'
         already_saved = super(House, self).get()
         if already_saved:

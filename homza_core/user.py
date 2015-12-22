@@ -2,19 +2,20 @@ import pydash as _
 import yaml, os
 from . import Entity
 from music_player import MusicPlayer
-from time import Time
+from alttime import AltTime
 
 class User(Entity):
     _collection = 'homza'
     _type = 'user'
 
     def __init__(self, name, mac_addresses=[], image=None, song=None):
+        self.type = User._type
         if not name:
             raise Entity.ArgumentMissingException('User.name')
         self._id = name
-        already_saved = super(User, self).get()
+        already_saved = self.get()
         if already_saved is not None:
-            #self = already_saved
+            self = already_saved
             self.update_my_time()
         else:
             self.mac_addresses = mac_addresses
@@ -28,15 +29,15 @@ class User(Entity):
         MusicPlayer(self.song).play_song()
         
     def update_my_time(self):
-        print self._id
-        time = Time()
-        print time.retrieve_time()
-        self.time = Time()
-        Entity.update(User)
+        extime = AltTime.retrieve_time()
+        self.time = extime
+        self.update()
 
     @classmethod
     def get_all_with_mac_addresses(klass, mac_addresses):
         all_users = super(User, klass).get_all()
+        for user in all_users:
+            print user._id + '*'
         filtered_users = _.collections.filter_(
             all_users,
             lambda user: any(
