@@ -12,14 +12,14 @@ logger = logging.getLogger(__name__)
 def connect_to_db():
     COUCHDB_SERVER = os.environ.get('COUCHDB_SERVER')
     if not COUCHDB_SERVER:
-        COUCHDB_SERVER = 'http://localhost:5984'
+        COUCHDB_SERVER = 'localhost:5984'
     COUCHDB_USERNAME = os.environ.get('COUCHDB_USERNAME')
     COUCHDB_PASSWORD = os.environ.get('COUCHDB_PASSWORD')
 
     if COUCHDB_USERNAME and COUCHDB_PASSWORD:
-        couch = Server('{}:{}@{}'.format(COUCHDB_USERNAME, COUCHDB_PASSWORD, COUCHDB_SERVER))
+        couch = Server('http://{}:{}@{}'.format(COUCHDB_USERNAME, COUCHDB_PASSWORD, COUCHDB_SERVER))
     else:
-        couch = Server('{}'.format(COUCHDB_SERVER))
+        couch = Server('http://{}'.format(COUCHDB_SERVER))
     return couch
 
 def get_view(entity, view_name):
