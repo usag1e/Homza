@@ -32,10 +32,13 @@ def get_view(entity, view_name):
 
 def get_all_of(entity):
     results = []
+    db = server.get_or_create_db(entity._collection)
     view_results = get_view(entity, '_all_docs')
     for result in view_results:
         if not '_design' in result['id']:
-            results.append(entity(result['id']))
+            doc = db[result['id']]
+            if doc['type'] is entity._type:
+                results.append(entity(result['id']))
     return results
 
 def get_entity(entity):
@@ -75,42 +78,6 @@ def remove_entity(entity):
         logger.info('Entity %s was already deleted from %s' % (entity._id, entity._collection))
     except:
         raise
-
-def generate_event( earliest_date, common_words_clusters, clusters, website_clusters, image_clusters, origin_clusters, origin_name, origin_url ):
-    db_events = server.get_or_create_db('events')
-    db_events.compact()
-
-    try:
-        doc = db_events[ earliest_date ]
-        if len( doc['articles'] ) != len(clusters):
-            logger.warning( "Cluster already existing but with less articles, updating" )
-            db_events.delete( doc )
-            dict_field_values = {
-                '_id'                   :       earliest_date,
-                'common_words'  :       common_words_clusters,
-                'articles'              :       clusters,
-                'websites'              :       website_clusters,
-                'images'        :   image_clusters,
-                'origin'        :   origin_clusters,
-                'summary'       :   "",
-                'origin_name'   :   origin_name,
-                'origin_urls'   :   origin_url
-            }
-            return db_events.create( dict_field_values )
-
-    except ResourceNotFound:
-        dict_field_values = {
-                '_id'                   :       earliest_date,
-                'common_words'  :       common_words_clusters,
-                'articles'              :       clusters,
-                'websites'              :       website_clusters,
-                'images'        :   image_clusters,
-                'origin'        :   origin_clusters,
-                'summary'       :   "",
-                'origin_name'   :   origin_name,
-                'origin_urls'   :   origin_url
-        }
-        return db_events.create( dict_field_values )
 
 #                           #
 #        Clearing DB        #
