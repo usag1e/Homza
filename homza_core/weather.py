@@ -19,6 +19,7 @@ class WeatherCenter(Entity):
         self.getWeather()
         self.update()
         logger.info("Updated Weather data.")
+        logger.info("%s" % self.temperature)
         
     def __call__(self):
         self.__init__()

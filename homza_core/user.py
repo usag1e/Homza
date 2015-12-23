@@ -3,6 +3,9 @@ import yaml, os
 from entity import Entity
 from music_player import MusicPlayer
 from alttime import AltTime
+import logging
+
+logger = logging.getLogger(__name__)
 
 class User(Entity):
     _collection = 'homza'
@@ -30,7 +33,12 @@ class User(Entity):
     def update_my_time(self):
         extime = AltTime.retrieve_time()
         detected_time = extime
-        if type(self.time) is not list:
+	#print self.time, type(self.time)
+        try:    
+            if not self.time:
+                print "Not self.time"
+                self.time = []
+        except:
             self.time = []
         self.time.append(detected_time)
 
