@@ -4,7 +4,7 @@ from multiprocessing import Process
 import time
 
 
-sweeper = NetworkSweeper()
+
 #up_macs = sweeper.macs
 #present_inhabitants = User.get_all_with_mac_addresses(up_macs)
 #for user in present_inhabitants:
@@ -19,6 +19,7 @@ i = 0
 
 while True:
     processes = []
+    sweeper = NetworkSweeper()
     p1 = Process( target = sweeper )
     processes.append(p1)
     i = i + 1
