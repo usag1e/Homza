@@ -17,7 +17,6 @@ class House(Entity):
         already_saved = super(House, self).get()
         if already_saved:
             self = already_saved
-            print self.name, self.latitude, self.longitude
         else:
             if name:
                 self.name = name

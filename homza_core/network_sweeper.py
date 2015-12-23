@@ -4,6 +4,9 @@ class NetworkSweeper:
     def __init__(self):
         self.sweep()
     
+    def __call__(self):
+        self.sweep()
+    
     def sweep(self):
         up_macs=[]
         for i in range(0,3):

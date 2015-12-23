@@ -45,6 +45,7 @@ class User(Entity):
         )
         for user in filtered_users:
             user.update_my_time()
+            logger.info("%s is home" % user._id)
         return filtered_users
 
     @classmethod
