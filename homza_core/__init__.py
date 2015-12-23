@@ -19,6 +19,7 @@ from .user import User
 from .iss import IssFinder
 from .network_sweeper import NetworkSweeper
 from .weather import WeatherCenter
+from .subway import Subway
 
 House.init()
 User.init()

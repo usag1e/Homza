@@ -10,4 +10,5 @@ for user in present_inhabitants:
     
 iss = IssFinder()
 weather = WeatherCenter()
+subway = Subway()
 
