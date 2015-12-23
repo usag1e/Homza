@@ -7,7 +7,7 @@ from homza_core import *
 #for user in present_inhabitants:
 #    print user._id + ' detected'
     
-#iss = IssFinder()
+iss = IssFinder()
 #print iss.date
 #print iss.duration
 

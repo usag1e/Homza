@@ -3,12 +3,18 @@ from house import House
 from internet import Internet
 import logging
 import calendar, time
+from entity import Entity
 
 logger = logging.getLogger(__name__)
 
-class IssFinder:
+class IssFinder(Entity):
+    _collection = 'homza'
+    _type = 'iss'
+    
     def __init__(self):
+        self._id = "iss"
         self.next_passage()
+        self.create()
         
     def next_passage(self):
         house = House()
