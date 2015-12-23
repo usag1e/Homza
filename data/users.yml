@@ -2,30 +2,30 @@
   mac_addresses:
       - '8C:3A:E3:3E:56:26'
       - 'AC:E0:10:0F:6F:73'
-  image: 'images/ilyass.jpg'
+  image: 'assets/images/ilyass.jpg'
   song: 'songs/ilyass.mp3'
 - name: 'Joe'
   mac_addresses:
       - "BC:77:37:E7:0B:49"
       - "34:FC:EF:CB:A1:BB"
-  image: 'images/joe.jpg'
+  image: 'assets/images/joe.jpg'
   song: 'songs/joe.mp3'
 - name: 'Yahya'
   mac_addresses:
       - "98:D6:F7:6A:52:13"
       - "80:56:F2:70:85:DB"
-  image: 'images/yahya.jpg'
+  image: 'assets/images/yahya.jpg'
   song: 'songs/yahya.mp3'
 - name: 'Gael'
   mac_addresses:
       - "40:78:6A:C2:1C:06"
       - "80:56:F2:08:AE:45"
-  image: 'images/gael.jpg'
+  image: 'assets/images/gael.jpg'
   song: 'songs/gael.mp3'
 - name: 'Adrien'
   mac_addresses:
       - "40:B8:37:AC:87:69"
       - "34:68:95:ED:54:73"
-  image: 'images/adrien.jpg'
+  image: 'assets/images/adrien.jpg'
   song: 'songs/adrien.mp3'
 

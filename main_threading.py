@@ -33,6 +33,8 @@ while True:
         pr.start()
     for pr in processes:
         pr.join()
+    up_macs = sweeper.macs
+    present_inhabitants = User.get_all_with_mac_addresses(up_macs)
     time.sleep(2)
     
     
