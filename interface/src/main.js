@@ -7,7 +7,6 @@ Vue.use(Resource)
 let mv = new Vue({
   el: '#content',
   components: { User },
-  data: {},
   ready: function ready () {
     this.$http.get('http://127.0.0.1:5984/homza/house').then(
       function (response) {

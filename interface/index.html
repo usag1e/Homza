@@ -7,12 +7,13 @@
   </head>
   <body>
     <main id="content">
-    <h1>{{ home.name }}</h1>
+    <h1 v-if="home.name">{{ home.name }}</h1>
+    <h1 v-else>Welcome to your House</h1>
       <content>
         <user v-for='user in users'
+          :is-here='user.value.isHere'
           :name='user.value.name'
           :image='user.value.image'
-          :is-here='user.value.isHere'
         >
         </user>
       </content>
