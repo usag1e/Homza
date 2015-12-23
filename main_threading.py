@@ -24,7 +24,7 @@ while True:
     processes.append(p1)
     i = i + 1
     
-    if i > 3:
+    if i > 10:
         p2 = Process( target = iss )
         p3 = Process( target = weather )
         p4 = Process( target = subway )
@@ -39,6 +39,6 @@ while True:
         pr.join()
     up_macs = sweeper.macs
     present_inhabitants = User.get_all_with_mac_addresses(up_macs)
-    time.sleep(2)
+    time.sleep(0.3)
     
     

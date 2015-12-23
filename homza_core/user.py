@@ -35,12 +35,11 @@ class User(Entity):
         detected_time = extime
 	#print self.time, type(self.time)
         try:    
-            if not self.time:
-                print "Not self.time"
-                self.time = []
+            self.time.append(detected_time)
         except:
             self.time = []
-        self.time.append(detected_time)
+            self.time.append(detected_time)
+        self.create()
 
     @classmethod
     def get_all_with_mac_addresses(klass, mac_addresses):
