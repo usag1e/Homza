@@ -18,6 +18,7 @@ class IssFinder(Entity):
         self.next_passage()
         self.update()
         logger.info("Updated Iss data.")
+        logger.info("Next passage is %s" % self.date)
         
     def __call__(self):
         self.__init__()

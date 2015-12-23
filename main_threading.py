@@ -12,6 +12,7 @@ sweeper = NetworkSweeper()
     
 iss = IssFinder()
 weather = WeatherCenter()
+subway = Subway()
 
 
 i = 0
@@ -25,8 +26,10 @@ while True:
     if i > 3:
         p2 = Process( target = iss )
         p3 = Process( target = weather )
+        p4 = Process( target = subway )
         processes.append( p2 )
         processes.append( p3 )
+        processes.append( p4 )
         i = 0
         
     for pr in processes:
