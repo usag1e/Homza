@@ -2,3 +2,5 @@
 *.pyc
 *.*~
 *.log
+interface/node_modules
+interface/dist
