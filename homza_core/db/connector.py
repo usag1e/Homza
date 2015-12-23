@@ -62,11 +62,15 @@ def save_entity(entity):
     try:
         if entity._id:
             instance = db[entity._id]
-            db.save_doc(entity.toCouch())
+            doc = entity.toCouch()
+            doc["_rev"] = instance["_rev"] 
+            db.save_doc(doc)
+            db.compact()
     except ResourceNotFound:
         db[entity._id] = entity.toCouch()
-    except:
+    except :
         raise
+        
 
 def remove_entity(entity):
     try:
