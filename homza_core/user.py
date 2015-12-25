@@ -4,6 +4,8 @@ from entity import Entity
 from music_player import MusicPlayer
 from alttime import AltTime
 import logging
+import sys
+sys.setrecursionlimit(10000)
 
 logger = logging.getLogger(__name__)
 
@@ -19,6 +21,7 @@ class User(Entity):
         already_saved = self.get()
         if already_saved is not None:
             self = already_saved
+            self.update_my_status()
         else:
             self.mac_addresses = mac_addresses
             if image:
@@ -33,13 +36,29 @@ class User(Entity):
     def update_my_time(self):
         extime = AltTime.retrieve_time()
         detected_time = extime
-	#print self.time, type(self.time)
+        if int(self.time[-1])- int(self.time[-2])>1500:
+            print self.time[-1], self.time[-2], int(self.time[-1])-int(self.time[-2])
+            self.play_song()
         try:    
             self.time.append(detected_time)
         except:
             self.time = []
             self.time.append(detected_time)
         self.create()
+
+    def update_my_status(self):
+        time_now = AltTime.retrieve_time()
+        try:
+            for moment in self.time:
+                if int(time_now) - int(moment) < 780:
+                    self.status = "here"                    
+                else:
+                    self.status = "not_here"
+                #logger.info("%s status is updated as %s" % (self._id, self.status)) 
+        except AttributeError:
+            pass
+        
+        
 
     @classmethod
     def get_all_with_mac_addresses(klass, mac_addresses):

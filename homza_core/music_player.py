@@ -13,7 +13,6 @@ logger = logging.getLogger(__name__)
 class MusicPlayer:
     def __init__(self, file_to_play):
         self.file_to_play = file_to_play
-        self.play_song()
 
     def program_exists(self, name):
         try:
