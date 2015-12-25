@@ -36,9 +36,15 @@ class User(Entity):
     def update_my_time(self):
         extime = AltTime.retrieve_time()
         detected_time = extime
-        if int(self.time[-1])- int(self.time[-2])>1500:
-            print self.time[-1], self.time[-2], int(self.time[-1])-int(self.time[-2])
-            self.play_song()
+        #Check if the inhabitant just arrived 
+        #See if was here last loop but not here the onw before
+        try:
+            if int(self.time[-1])- int(self.time[-2])>1500:
+                print self.time[-1], self.time[-2], int(self.time[-1])-int(self.time[-2])
+                self.play_song()
+        except:
+            pass
+        #Record time and date of the detection
         try:    
             self.time.append(detected_time)
         except:
