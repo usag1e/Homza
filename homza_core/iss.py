@@ -35,5 +35,4 @@ class IssFinder(Entity):
         if object_response:
             self.date = object_response['response'][0]['risetime']
             self.duration = object_response['response'][0]['duration']
-            self.remaining = object_response['response'][0][ 'risetime' ] - calendar.timegm(time.gmtime())
             self.time = AltTime().retrieve_time()         
