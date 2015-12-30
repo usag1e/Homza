@@ -12,8 +12,10 @@ logger = logging.getLogger(__name__)
 class User(Entity):
     _collection = 'homza'
     _type = 'user'
+    who_knows_delay = 10 # minutes
+    away_delay = 30 # minutes
 
-    def __init__(self, name, mac_addresses=[], image=None, song=None):
+    def __init__(self, name, mac_addresses=[], image=None, song=None, update_time=False):
         self.type = User._type
         if not name:
             raise Entity.ArgumentMissingException('User.name')
@@ -21,7 +23,7 @@ class User(Entity):
         already_saved = self.get()
         if already_saved is not None:
             self = already_saved
-            self.update_my_status()
+            self.update_my_time(update_time)
         else:
             self.mac_addresses = mac_addresses
             if image:
@@ -33,38 +35,29 @@ class User(Entity):
     def play_song(self):
         MusicPlayer(self.song).play_song()
         
-    def update_my_time(self):
+    def update_my_time(self, update_time):
         extime = AltTime.retrieve_time()
         detected_time = extime
         #Check if the inhabitant just arrived 
         #See if was here last loop but not here the onw before
         try:
-            if int(self.time[-1])- int(self.time[-2])>1500:
-                print self.time[-1], self.time[-2], int(self.time[-1])-int(self.time[-2])
+            if int(detected_time) - int(self.time[-1]) > 60 * User.away_delay:
                 self.play_song()
         except:
             pass
-        #Record time and date of the detection
-        try:    
-            self.time.append(detected_time)
-        except:
-            self.time = []
-            self.time.append(detected_time)
+        if update_time:
+            self.isHere = 1
+            try:
+                self.time.append(detected_time)
+            except:
+                self.time = []
+                self.time.append(detected_time)
+        else:
+            if (int(detected_time) - int(self.time[len(self.time)-1])) > 60 * User.who_knows_delay or len(self.time) is 0:
+                self.isHere = 0
+            if (int(detected_time) - int(self.time[len(self.time)-1])) > 60 * User.away_delay:
+                self.isHere = -1
         self.create()
-
-    def update_my_status(self):
-        time_now = AltTime.retrieve_time()
-        try:
-            for moment in self.time:
-                if int(time_now) - int(moment) < 780:
-                    self.status = "here"                    
-                else:
-                    self.status = "not_here"
-                #logger.info("%s status is updated as %s" % (self._id, self.status)) 
-        except AttributeError:
-            pass
-        
-        
 
     @classmethod
     def get_all_with_mac_addresses(klass, mac_addresses):
@@ -76,7 +69,7 @@ class User(Entity):
             )
         )
         for user in filtered_users:
-            user.update_my_time()
+            user.update_my_time(True)
             logger.info("%s is home" % user._id)
         return filtered_users
 

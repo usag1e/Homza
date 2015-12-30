@@ -3,8 +3,6 @@ from homza_core import *
 from multiprocessing import Process
 import time
 
-
-
 #up_macs = sweeper.macs
 #present_inhabitants = User.get_all_with_mac_addresses(up_macs)
 #for user in present_inhabitants:
@@ -13,7 +11,6 @@ import time
 iss = IssFinder()
 weather = WeatherCenter()
 subway = Subway()
-
 
 i = 0
 
