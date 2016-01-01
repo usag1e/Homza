@@ -19,3 +19,10 @@ body {
   flex-direction: row;
 }
 
+.title-with-background {
+  background-size: cover;
+  background-position: center center;
+  margin: 0;
+  padding: 1em;
+}
+

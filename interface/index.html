@@ -7,11 +7,12 @@
   </head>
   <body>
     <main id="content">
-    <h1
-      v-if="home.name"
-      background-image='{{ home.background }}'
-    >{{ home.name }}</h1>
-    <h1 v-else>Welcome to your House</h1>
+      <h1
+        v-if="home.name"
+        class='title-with-background'
+        style="background-image: url('{{ home.background }}');"
+      >{{ home.name }}</h1>
+      <h1 v-else>Welcome to your House</h1>
       <content>
         <user v-for='user in users'
           :is-here='user.value.isHere'
