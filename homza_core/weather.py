@@ -45,20 +45,20 @@ class WeatherCenter(Entity):
                 SS = rj['sys']['sunset']
                 wind = rj['wind']['speed']
                 sunrise = (
-                	    datetime.datetime.fromtimestamp(
-                    	int(SR)
-                	    ).strftime('%Y%m%d%H%M%S')
-	            )
+                    datetime.datetime.fromtimestamp(
+                        int(SR)
+                    ).strftime('%Y%m%d%H%M%S')
+                )
                 sunset = (
-	                datetime.datetime.fromtimestamp(
-		            int(SS)
-	                ).strftime('%Y%m%d%H%M%S')
-	            )
+                    datetime.datetime.fromtimestamp(
+                        int(SS)
+                    ).strftime('%Y%m%d%H%M%S')
+                )
                 time_of_treatment = (
-	                datetime.datetime.fromtimestamp(
-		            int(time.mktime(time.localtime()))
-	                ).strftime('%Y%m%d%H%M%S')
-	            )
+                    datetime.datetime.fromtimestamp(
+                        int(time.mktime(time.localtime()))
+                    ).strftime('%Y%m%d%H%M%S')
+                )
                 self.time = time_of_treatment
                 self.wind = wind
                 self.sunset = sunset

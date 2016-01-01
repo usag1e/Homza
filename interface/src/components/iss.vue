@@ -70,6 +70,7 @@
     <p>Latest passage was {{ new Date(nextDate * 1000).toLocaleString() }}</p>
     <p>Lasted {{ duration }}s</p>
     <p>Was visible {{ Math.abs(remainingBeforeStart + duration) }} seconds ago</p>
+  </div>
 </div>
 </template>
 

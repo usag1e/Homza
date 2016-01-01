@@ -53,10 +53,13 @@ class User(Entity):
                 self.time = []
                 self.time.append(detected_time)
         else:
-            if (int(detected_time) - int(self.time[len(self.time)-1])) > 60 * User.who_knows_delay or len(self.time) is 0:
+            try:
+                if (int(detected_time) - int(self.time[len(self.time)-1])) > 60 * User.who_knows_delay or len(self.time) is 0:
+                    self.isHere = 0
+                if (int(detected_time) - int(self.time[len(self.time)-1])) > 60 * User.away_delay:
+                    self.isHere = -1
+            except:
                 self.isHere = 0
-            if (int(detected_time) - int(self.time[len(self.time)-1])) > 60 * User.away_delay:
-                self.isHere = -1
         self.create()
 
     @classmethod
