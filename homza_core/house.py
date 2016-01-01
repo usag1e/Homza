@@ -11,7 +11,7 @@ class House(Entity):
     _collection = 'homza'
     _type = 'home'
 
-    def __init__(self, name=None, latitude=None, longitude=None, background=None):
+    def __init__(self, name=None, latitude=None, longitude=None, background=None, SSID=None, password=None):
         self.type = House._type
         self._id = 'house'
         already_saved = super(House, self).get()
@@ -29,6 +29,10 @@ class House(Entity):
                 print self.latitude
             if background:
                 self.background = background
+            if SSID:
+                self.SSID = SSID
+            if password:
+                self.password = password
             self.create()
     
     @classmethod
@@ -40,6 +44,8 @@ class House(Entity):
                 houseData['name'],
                 houseData['latitude'],
                 houseData['longitude'],
-                houseData['background']
+                houseData['background'],
+                houseData['SSID'],
+                houseData['password']
             )
             return house

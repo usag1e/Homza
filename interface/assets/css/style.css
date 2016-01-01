@@ -20,9 +20,15 @@ body {
 }
 
 .title-with-background {
+  cursor: help;
   background-size: cover;
   background-position: center center;
+  width: 100%;
+}
+.title-with-background h1 {
   margin: 0;
   padding: 1em;
+	background: linear-gradient(to bottom, rgba(200, 247, 197,0.8) 0%,rgba(3, 166, 120,0.8) 60%);
+  color: white;
 }
 
