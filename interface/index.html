@@ -18,21 +18,14 @@
       <h1 v-else>Welcome to your House</h1>
       <content>
         <user v-for='user in users'
-          :is-here='user.value.isHere'
-          :name='user.value.name'
-          :image='user.value.image'
+          :name='user.value._id'
         >
         </user>
       </content>
       <content>
-        <iss
-          :next-date='iss.date'
-          :duration='iss.duration'
-        >
+        <iss>
         </iss>
-        <weather
-          :weather='weather'
-        >
+        <weather>
         </weather>
       </content>
     </main>

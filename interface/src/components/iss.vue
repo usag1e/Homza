@@ -75,12 +75,15 @@
 </template>
 
 <script>
+import {getISS} from '../utils'
+
 export default {
   props: [
     'nextDate',
     'duration'
   ],
   data: function () {
+    getISS(this)
     this.$set('isHappening', false)
     this.$set('remainingBeforeStart', 0)
     this.$set('issx', '0%')
@@ -115,6 +118,8 @@ export default {
         const y = _this.heightStart - percentOfVisibilityTime / 100 * heightEnd
         _this.$set('issx', x)
         _this.$set('issy', y)
+      } else if (timeLeftBeforeStart < -_this.duration) {
+        getISS(_this)
       }
     }, 1000)
   }

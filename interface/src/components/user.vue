@@ -31,11 +31,18 @@
 </template>
 
 <script>
+import {getUser} from '../utils'
+
 export default {
   props: [
-    'name',
-    'image',
-    'isHere'
-  ]
+    'name'
+  ],
+  ready: function () {
+    getUser(this)
+    var _this = this
+    setInterval(function () {
+      getUser(_this)
+    }, 10000)
+  }
 }
 </script>

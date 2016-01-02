@@ -44,12 +44,18 @@
 </template>
 
 <script>
+import {getWeather} from '../utils'
+
 export default {
   props: [
     'weather'
   ],
   ready: function () {
-    console.log(this.weather)
+    getWeather(this)
+    var _this = this
+    setInterval(function () {
+      getWeather(_this)
+    }, 10 * 60 * 1000)
   }
 }
 </script>
