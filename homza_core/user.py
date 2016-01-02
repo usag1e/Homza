@@ -41,6 +41,7 @@ class User(Entity):
         #Check if the inhabitant just arrived 
         #See if was here last loop but not here the onw before
         try:
+            print "%s was here last %s seconds ago" % (self._id, int(detected_time) - int(self.time[-1]))
             if int(detected_time) - int(self.time[-1]) > 60 * User.away_delay:
                 self.play_song()
         except:
@@ -48,15 +49,17 @@ class User(Entity):
         if update_time:
             self.isHere = 1
             try:
+                if len(self.time) >= 100:
+                    self.time.pop(0)
                 self.time.append(detected_time)
             except:
                 self.time = []
                 self.time.append(detected_time)
         else:
             try:
-                if (int(detected_time) - int(self.time[len(self.time)-1])) > 60 * User.who_knows_delay or len(self.time) is 0:
+                if (int(detected_time) - int(self.time[-1])) > 60 * User.who_knows_delay or len(self.time) is 0:
                     self.isHere = 0
-                if (int(detected_time) - int(self.time[len(self.time)-1])) > 60 * User.away_delay:
+                if (int(detected_time) - int(self.time[-1])) > 60 * User.away_delay:
                     self.isHere = -1
             except:
                 self.isHere = 0
