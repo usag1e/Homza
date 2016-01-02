@@ -49,6 +49,21 @@ export function getISS (thisObject) {
   )
 }
 
+export function getMetro (thisObject) {
+  // Fetching Weather data
+  thisObject.$http.get('http://127.0.0.1:5984/homza/subway')
+  .then(
+    function (response) {
+      if (response.status === 200) {
+        thisObject.$set('green', response.data.metro1)
+        thisObject.$set('orange', response.data.metro2)
+        thisObject.$set('yellow', response.data.metro4)
+        thisObject.$set('blue', response.data.metro5)
+      }
+    }
+  )
+}
+
 export function getWeather (thisObject) {
   // Fetching Weather data
   thisObject.$http.get('http://127.0.0.1:5984/homza/weather')

@@ -47,9 +47,6 @@
 import {getWeather} from '../utils'
 
 export default {
-  props: [
-    'weather'
-  ],
   ready: function () {
     getWeather(this)
     var _this = this
