@@ -2,7 +2,21 @@
 
 ## Dependencies
 
-* `sudo apt-get install mplayer`
-* `sudo apt-get install nmap`
+#### Python packages
 
-* `sudo pip install python-nmap`
+* `couchdbkit`
+* `restkit`
+* `Resource`
+* `python-dateutil`
+* `couchdb`
+* `pydash`
+* `python-nmap`
+* `xmltodict`
+
+#### Apt-get
+
+* `mplayer`
+* `nmap`
+* `couchdb`
+* `python-dev`
+* `libyaml-dev`
