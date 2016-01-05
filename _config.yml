@@ -1,0 +1,67 @@
+url: https://y7kim.github.io
+baseurl: /agency-jekyll-theme/
+
+# Site settings
+title: Awesome Title
+email: team@nalyze.net
+description: "Homza is a set of classes designed to transform your Raspberry Pi (or other machine) into the a convenient e-butler for a shared space, it provides information about the weather, transportation, known users present in the physical space, ... Additional tiles can easily be developed for it."
+
+# Color settings (hex-codes without the leading hash-tag)
+color:
+  primary: fed136
+  secondary: fec503  
+  secondary-dark: 333
+
+# Team names, titles and social links
+people:
+- name: Ilyass Tabiai
+  pic: 1
+  position: Sleeping Ninja
+  social:
+    - title: twitter
+      url: #
+    - title: stack-overflow
+      url: #
+
+- name: Adrien Thiery
+  pic: 2
+  position: Laughing Jedi
+  social:
+    - title: twitter
+      url: #
+    - title: facebook
+      url: #
+    - title: linkedin
+      url: #
+
+- name: Youness Berraha
+  pic: 3
+  position: Magic Fruit Pirate
+  social:
+    - title: twitter
+      url: #
+    - title: facebook
+      url: #
+    - title: google-plus
+      url: #
+
+# Social networks usernames (many more available: google-plus, flickr, dribbble, pinterest, instagram, tumblr, linkedin, etc.)
+social:
+  - title: twitter
+    url: http://twitter.com/nalyze_
+  - title: facebook
+    url:
+  - title: stack-overflow
+    url: http://stackoverflow.com/questions/tagged/jekyll
+  - title: bitbucket 
+    url: http://bitbucket.org/jekyll
+  - title: github
+    url: https://github.com/Nalyze
+
+# Postal address (add as many lines as necessary)
+address:
+  - line: Montreal, QC, Canada
+
+# Build settings
+markdown: kramdown
+permalink: pretty
