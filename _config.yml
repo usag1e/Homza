@@ -19,11 +19,11 @@ people:
   position: Sleeping Ninja
   social:
     - title: twitter
-      url: #
-    - title: stack-overflow
-      url: #
+      url: https://twitter.com/Joydisee
     - title: linkedin
-      url: #
+      url: https://www.linkedin.com/in/ilyasstabiai
+    - title: flickr
+      url: https://www.flickr.com/photos/grainsdecesames/
 
 - name: Adrien Thiery
   pic: 2
@@ -51,12 +51,8 @@ people:
 social:
   - title: twitter
     url: http://twitter.com/nalyze_
-  - title: facebook
-    url:
-  - title: stack-overflow
-    url: http://stackoverflow.com/questions/tagged/jekyll
-  - title: bitbucket 
-    url: http://bitbucket.org/jekyll
+  - title: bitbucket
+    url: http://bitbucket.org/nalyze
   - title: github
     url: https://github.com/Nalyze
 
