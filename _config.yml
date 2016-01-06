@@ -1,8 +1,8 @@
-url: http://usag1e.github.io/Homza/
-baseurl: /
+url: http://usag1e.github.io/
+baseurl: /Homza/
 
 # Site settings
-title: Awesome Title
+title: Homza
 email: team@nalyze.net
 description: "Homza is a set of classes designed to transform your Raspberry Pi (or other machine) into the a convenient e-butler for a shared space, it provides information about the weather, transportation, known users present in the physical space, ... Additional tiles can easily be developed for it."
 

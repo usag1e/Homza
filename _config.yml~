@@ -1,5 +1,5 @@
-url: https://y7kim.github.io
-baseurl: /agency-jekyll-theme/
+url: http://usag1e.github.io/
+baseurl: /Homza/
 
 # Site settings
 title: Awesome Title
@@ -21,6 +21,8 @@ people:
     - title: twitter
       url: #
     - title: stack-overflow
+      url: #
+    - title: linkedin
       url: #
 
 - name: Adrien Thiery
@@ -56,12 +58,11 @@ social:
   - title: bitbucket 
     url: http://bitbucket.org/jekyll
   - title: github
-    url: http://github.com/jekyll
+    url: https://github.com/Nalyze
 
 # Postal address (add as many lines as necessary)
 address:
-  - line: 3481 Melrose Place
-  - line: Beverly Hills, CA 90210
+  - line: Montreal, QC, Canada
 
 # Build settings
 markdown: kramdown
