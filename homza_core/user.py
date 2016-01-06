@@ -5,6 +5,7 @@ from music_player import MusicPlayer
 from alttime import AltTime
 import logging
 import sys
+from network_sweeper import NetworkSweeper
 sys.setrecursionlimit(10000)
 
 logger = logging.getLogger(__name__)
@@ -65,6 +66,7 @@ class User(Entity):
             except:
                 self.isHere = 0
         self.create()
+        
 
     @classmethod
     def get_all_with_mac_addresses(klass, mac_addresses):
@@ -75,6 +77,20 @@ class User(Entity):
                 one_mac for one_mac in user.mac_addresses if one_mac in mac_addresses
             )
         )
+        #Let's get all the known macs in one list to find the unkowns
+        #print "MAC ADDRESSES:", mac_addresses
+        all_known_macs = []
+        for user in filtered_users:
+            all_known_macs.append(user.mac_addresses)
+        #print "all_known_macs", all_known_macs
+        
+        #Now let's create unkown objects and 
+        for one_mac in mac_addresses:
+           if one_mac not in all_known_macs:
+                network = NetworkSweeper()
+                network.identify_unknowns(one_mac)
+        
+        #Let's update the known users we found on the network
         for user in filtered_users:
             user.update_my_time(True)
             logger.info("%s is home" % user._id)
