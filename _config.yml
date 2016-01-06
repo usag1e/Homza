@@ -1,5 +1,5 @@
-url: https://y7kim.github.io
-baseurl: /agency-jekyll-theme/
+url: http://usag1e.github.io/Homza/
+baseurl: /
 
 # Site settings
 title: Awesome Title
@@ -21,6 +21,8 @@ people:
     - title: twitter
       url: #
     - title: stack-overflow
+      url: #
+    - title: linkedin
       url: #
 
 - name: Adrien Thiery
