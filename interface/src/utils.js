@@ -1,6 +1,8 @@
+var API_URL='192.168.0.144';
+
 export function getHouse (thisObject) {
   // Fetching House
-  thisObject.$http.get('http://127.0.0.1:5984/homza/house')
+  thisObject.$http.get('http://' + API_URL + ':5984/homza/house')
   .then(
     function (response) {
       if (response.status === 200) {
@@ -12,7 +14,7 @@ export function getHouse (thisObject) {
 
 export function getUsers (thisObject) {
   // Fetching Users
-  thisObject.$http.get('http://127.0.0.1:5984/homza/_design/users/_view/by_name')
+  thisObject.$http.get('http://' + API_URL + ':5984/homza/_design/users/_view/by_name')
   .then(
     function (response) {
       if (response.status === 200) {
@@ -25,7 +27,7 @@ export function getUsers (thisObject) {
 export function getUser (thisObject, name) {
   // Fetching User
   console.log
-  thisObject.$http.get('http://127.0.0.1:5984/homza/' + thisObject.name)
+  thisObject.$http.get('http://' + API_URL + ':5984/homza/' + thisObject.name)
   .then(
     function (response) {
       if (response.status === 200) {
@@ -38,7 +40,7 @@ export function getUser (thisObject, name) {
 
 export function getISS (thisObject) {
   // Fetching Iss data
-  thisObject.$http.get('http://127.0.0.1:5984/homza/iss')
+  thisObject.$http.get('http://' + API_URL + ':5984/homza/iss')
   .then(
     function (response) {
       if (response.status === 200) {
@@ -51,7 +53,7 @@ export function getISS (thisObject) {
 
 export function getMetro (thisObject) {
   // Fetching Weather data
-  thisObject.$http.get('http://127.0.0.1:5984/homza/subway')
+  thisObject.$http.get('http://' + API_URL + ':5984/homza/subway')
   .then(
     function (response) {
       if (response.status === 200) {
@@ -66,7 +68,7 @@ export function getMetro (thisObject) {
 
 export function getWeather (thisObject) {
   // Fetching Weather data
-  thisObject.$http.get('http://127.0.0.1:5984/homza/weather')
+  thisObject.$http.get('http://' + API_URL + ':5984/homza/weather')
   .then(
     function (response) {
       if (response.status === 200) {

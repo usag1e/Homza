@@ -2,6 +2,7 @@
   mac_addresses:
       - '8C:3A:E3:3E:56:26'
       - 'AC:E0:10:0F:6F:73'
+      - '78:F8:82:CF:7B:B8'
   image: 'assets/images/ilyass.jpg'
   song: 'songs/ilyass.mp3'
 - name: 'Joe'
