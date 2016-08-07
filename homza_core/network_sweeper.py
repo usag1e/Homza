@@ -21,7 +21,7 @@ class NetworkSweeper(Entity):
         up_macs=[]
         for i in range(0,3):
             nm = nmap.PortScanner()
-            nm.scan(hosts = '192.168.1.0/24', arguments = '-n -sP -PE -T5')
+            nm.scan(hosts = '192.168.0.0/24', arguments = '-n -sP -PE -T5')
             up_macs=[]
             ######### UPDATING DATABASE ##############
             for host in nm.all_hosts():	
