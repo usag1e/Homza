@@ -7,7 +7,7 @@
     <script>
         <?php 
         if ((substr($_SERVER['REMOTE_ADDR'],0,8) == "192.168.")) {
-            echo 'var API_URL = "192.168.1.144"';
+            echo 'var API_URL = "192.168.0.144"';
         } else if ($_SERVER['REMOTE_ADDR'] == "127.0.0.1") {
             echo 'var API_URL = "127.0.0.1"';
         } else {
