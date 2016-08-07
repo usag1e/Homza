@@ -9,7 +9,7 @@ while True:
     for user in present_inhabitants:
         print user._id + ' detected'
         
-    #iss = IssFinder()
-    #weather = WeatherCenter()
-    #subway = Subway()
+    iss = IssFinder()
+    weather = WeatherCenter()
+    subway = Subway()
 

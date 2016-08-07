@@ -30,7 +30,7 @@ class WeatherCenter(Entity):
         status= {}
         # Requesting weather from OpenWeatherMap for Montreal, in .json
         try:
-            r = Internet.get('http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&mode=json&units=metric&APPID=b55dc015063b76e0ba8531ffa35d7df6' % ( house.latitude, house.longitude ) )
+            r = Internet.get('http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&mode=json&units=metric&APPID=253c2b5fce827183bbbca5ce81c0a683' % ( house.latitude, house.longitude ) )
             #extracting the .json data from the request
             rj = r.json()
             

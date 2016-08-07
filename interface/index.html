@@ -8,7 +8,7 @@
   <body>
     <main id="content">
       <div
-        v-if="home.name"
+        v-if="home && home.name && home.background"
         title='SSID: {{ home.SSID }}\nPwd: {{ home.password }}'
         style="background-image: url('{{ home.background }}');"
         class='title-with-background'

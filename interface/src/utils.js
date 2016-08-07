@@ -1,4 +1,4 @@
-var API_URL='192.168.0.144';
+var API_URL = '192.168.1.144'
 
 export function getHouse (thisObject) {
   // Fetching House
