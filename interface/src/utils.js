@@ -1,5 +1,3 @@
-var API_URL='192.168.0.144';
-
 export function getHouse (thisObject) {
   // Fetching House
   thisObject.$http.get('http://' + API_URL + ':5984/homza/house')

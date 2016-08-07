@@ -13,6 +13,7 @@
   song: 'songs/joe.mp3'
 - name: 'Yahya'
   mac_addresses:
+      - "64:BC:0C:80:93:8A"
       - "98:D6:F7:6A:52:13"
       - "80:56:F2:70:85:DB"
   image: 'assets/images/yahya.jpg'
@@ -27,6 +28,7 @@
   mac_addresses:
       - "40:B8:37:AC:87:69"
       - "34:68:95:ED:54:73"
+      - "34:68:95:ed:54:73"
   image: 'assets/images/adrien.jpg'
   song: 'songs/adrien.mp3'
 

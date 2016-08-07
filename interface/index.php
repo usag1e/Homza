@@ -4,11 +4,22 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <title>Homza</title>
+    <script>
+        <?php 
+        if ((substr($_SERVER['REMOTE_ADDR'],0,8) == "192.168.")) {
+            echo 'var API_URL = "192.168.0.144"';
+        } else if ($_SERVER['REMOTE_ADDR'] == "127.0.0.1" || $_SERVER['REMOTE_ADDR'] == "::1") {
+            echo 'var API_URL = "127.0.0.1"';
+        } else {
+            echo 'var API_URL = "70.82.148.225"';
+        }
+        ?>
+    </script>
   </head>
   <body>
     <main id="content">
       <div
-        v-if="home.name"
+        v-if="home && home.name && home.background"
         title='SSID: {{ home.SSID }}\nPwd: {{ home.password }}'
         style="background-image: url('{{ home.background }}');"
         class='title-with-background'

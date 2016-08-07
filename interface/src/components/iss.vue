@@ -37,7 +37,9 @@
 <div
   class='iss'
 >
-  <svg id='sky'>
+  <svg
+    id='sky'
+  >
     <g id='stars-background'>
       <circle class='star' cx='2%' cy='50' r='2' />
       <circle class='star' cx='10%' cy='150' r='1' />
@@ -51,7 +53,9 @@
       <circle class='star' cx='85%' cy='50' r='0.55' />
       <circle class='star' cx='92%' cy='80' r='1.55' />
     </g>
-    <g id='iss-trajectory'>
+    <g
+      id='iss-trajectory'
+    >
       <path d="M 0 {{ heightStart }} L {{ widthMax }} 0" class="iss-trajectory" />
       <circle class='star' :class='{ "hide-iss": !isHappening }' cx='{{ issx }}' cy='{{ issy }}' r='5' />
     </g>
@@ -84,14 +88,17 @@ export default {
   ],
   data: function () {
     getISS(this)
-    this.$set('isHappening', false)
-    this.$set('remainingBeforeStart', 0)
-    this.$set('issx', '0%')
-    this.$set('issy', 0)
-    this.$set('heightStart', 130)
-    this.$set('heightMax', 0)
-    this.$set('widthStart', 0)
-    this.$set('widthMax', 3000)
+
+    return {
+      isHappening: false,
+      remainingBeforeStart: 0,
+      issx: '0%',
+      issy: 0,
+      heightStart: 130,
+      heightMax: 0,
+      widthStart: 0,
+      widthMax: 3000
+    }
   },
   ready: function () {
     let _this = this
